@@ -1,0 +1,24 @@
+<!-- Left side column. contains the logo and sidebar -->
+<aside class="left-side sidebar-offcanvas">
+	<section class="sidebar">
+
+		<!-- Sidebar Menu -->
+		<ul class="sidebar-menu">
+			<li ng-repeat="item in menuoptions" class="treeview">
+				<a>
+					<i class="fa fa-fw {{item.icon}}"></i>
+					{{item.name}}
+					<i class="fa fa-angle-left pull-right"></i>
+				</a>
+			  <ul class="treeview-menu">
+			    <li ng-repeat="subMenu in item.subMenus">
+			    	<a href="#" ui-sref="{{subMenu.sref}}">
+			    		<i class="fa fa-circle-o"></i>
+			    		{{subMenu.name}}
+			    	</a>
+			    </li>
+			  </ul>
+			</li>
+		</ul>
+	</section>
+</aside>

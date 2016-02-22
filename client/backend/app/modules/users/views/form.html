@@ -1,0 +1,25 @@
+<form name="form">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <a href="" ui-sref="^.list" class="btn btn-default">
+        <i class="fa fa-plus"></i>
+        <span ng-show="!ctrl.user.id" translate>添加用户</span>
+        <span ng-show="ctrl.user.id" translate>编辑用户</span>
+      </a>
+    </div>
+    <div class="panel-body">
+      <div class="row">
+        <div class="col-md-4">
+          <div class="alert alert-danger" ng-if="addError" translate>Could not add user!</div>
+          <formly-form model="ctrl.user" fields="ctrl.formFields" options="ctrl.formOptions"></formly-form>
+        </div>
+      </div>
+    </div>
+    <div class="panel-footer">
+      <button type="submit" class="btn btn-primary btn-success" ng-click="ctrl.submit()" ng-disabled="form.$invalid">
+        提交
+      </button>
+      <button type="button" class="btn btn-default" ng-click="ctrl.formOptions.resetModel()">重置</button>
+    </div>
+  </div>
+</form>

@@ -1,0 +1,32 @@
+{
+  "name": "Shop",
+  "base": "PersistedModel",
+  "properties": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "rtmp_url": {
+      "type": "string",
+      "required": true
+    },
+    "hls_url": {
+      "type": "string",
+      "required": true
+    },
+    "flv_url": {
+      "type": "string",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {
+    "interaction": {
+      "type": "hasMany",
+      "model": "Interaction",
+      "foreignKey": "shopId"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

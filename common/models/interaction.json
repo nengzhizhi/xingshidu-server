@@ -1,0 +1,21 @@
+{
+  "name": "Interaction",
+  "base": "PersistedModel",
+  "properties": {
+    "status": {
+      "type": "string",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {
+    "shop": {
+      "type": "belongsTo",
+      "model": "Shop",
+      "foreignKey": "shopId",
+      "required": true
+    }
+  },
+  "acls": [],
+  "methods": {}
+}
