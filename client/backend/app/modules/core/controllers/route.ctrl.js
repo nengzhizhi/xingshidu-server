@@ -2,11 +2,11 @@
 	'use strict';
 	angular
 		.module('com.module.core')
-		.controller('RouteCtrl', function (ApiService, User, $location) {
-			User.getCurrent(function (currentUser) {
+		.controller('RouteCtrl', function (UserService, $location) {
+			UserService.currentUser(function (user) {
 				$location.path('/app');
-			}, function () {
+			}, function (err) {
 				$location.path('/login');
-			});
+			})
 		})
 })();

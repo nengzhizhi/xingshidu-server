@@ -5,6 +5,9 @@
     "status": {
       "type": "string",
       "required": true
+    },
+    "created": {
+      "type": "date"
     }
   },
   "validations": [],
@@ -13,6 +16,12 @@
       "type": "belongsTo",
       "model": "Shop",
       "foreignKey": "shopId",
+      "required": true
+    },
+    "creater": {
+      "type": "belongsTo",
+      "model": "user",
+      "foreignKey": "userId",
       "required": true
     }
   },

@@ -1,4 +1,4 @@
-<div class="col-md-12">
+<div class="col-md-8">
   <div class="box">
     <div class="box-header">
       <h3 class="box-title">店铺管理</h3>
@@ -19,9 +19,9 @@
           </tr>
           <tr ng-repeat="shop in ctrl.shops">
             <td><a ui-sref="app.shop.edit({ id: shop.id })">{{shop.name}}</a></td>
-            <td>{{shop.rtmp_url}}</td>
-            <td>{{shop.hls_url}}</td>
-            <td>{{shop.flv_url}}</td>
+            <td></td>
+            <td></td>
+            <td></td>
             <td>
               <a ng-click="ctrl.deleteShop({ id: shop.id })" class="btn btn-danger">删除</a>
             </td>

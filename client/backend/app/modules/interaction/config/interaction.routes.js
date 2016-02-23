@@ -3,6 +3,30 @@
   angular
     .module('com.module.interaction')
     .config(function ($stateProvider) {
-
+      $stateProvider
+        .state('app.interaction', {
+          abstract: true,
+          url: '/interaction',
+          templateUrl: 'modules/interaction/views/main.html'
+        })
+        .state('app.interaction.list', {
+          url: '/list',
+          templateUrl: 'modules/interaction/views/list.html',
+          controllerAs: 'ctrl',
+          controller: function (InteractionService, interactions, $state) {
+            console.log(interactions);
+            this.interactions = interactions;
+            // this.deleteInteraction = function (interactionId) {
+            //   InteractionService.deleteInteraction(interactionId, function () {
+            //     $state.go($state.current, {}, {reload: true});
+            //   })
+            // }
+          },
+          resolve: {
+            interactions: function (InteractionService) {
+              return InteractionService.getInteractions();
+            }
+          }
+        })
     })
 })();

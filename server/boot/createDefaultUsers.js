@@ -1,9 +1,10 @@
 var async = require('async');
+var _ = require('lodash');
 
 module.exports = function (app) {
   var loopback = require('loopback');
 
-  var User = app.models.User;
+  var userModel = app.models.user;
   var Role = app.models.Role;
   var RoleMapping = app.models.RoleMapping;
 
@@ -16,7 +17,7 @@ module.exports = function (app) {
   for (var key in users) {
     Role.findOrCreate({ name: key }, function (err, role) {
       async.each(users[key], function (user, callback) {
-        User.findOrCreate(user, function(err, user) {
+        userModel.findOrCreate(user, function(err, user) {
           if (!!err) {
             return callback(err);
           }

@@ -10,20 +10,35 @@
 // 	console.log(data);
 // })
 //
-// function sendDanmu(){
-// 	socket.emit('danmu', { message: $('#danmu').val() })
-// }
+var interactionId = 'interaction-id';
+var nickname = "打地鼠";
+var avatar = "http://xxxx.png";
+var userId = Math.random();
+
+function sendMessage(){
+	socket.emit('send message', {
+    interactionId: interactionId,
+    nickname: nickname,
+    avatar: avatar,
+    message: $('#message').val()
+  })
+}
 
 var socket = io('http://localhost:3003');
-socket.on('connected', function (data) {
-  console.log('connected', data);
-  socket.emit('join room', { roomId: 'xxxx' });
-})
+// socket.on('connected', function (data) {
+//   console.log('connected');
+  socket.emit('join room', {
+    interactionId: 'xxxx',
+    nickname: nickname,
+    avatar: avatar,
+    userId: userId
+  });
+// })
 
 socket.on('joined', function (data) {
 	console.log('joined', data);
 })
 </script>
 
-<input type="text" id="danmu">
-<button onclick="sendDanmu()">send</button>
+<input type="text" id="message">
+<button onclick="sendMessage()">send</button>

@@ -2,7 +2,11 @@
   'use strict';
   angular
     .module('com.module.users')
-    .service('UserService', function ($state) {
+    .service('UserService', function ($state, User) {
+      this.currentUser = function (successCb, errorCb) {
+        return User.getCurrent(successCb, errorCb);
+      }
+
       this.getLoginFormFields = function () {
         var loginForm = [
           {

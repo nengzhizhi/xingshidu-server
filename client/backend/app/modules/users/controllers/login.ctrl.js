@@ -2,7 +2,7 @@
 	'use strict';
 	angular
 		.module('com.module.users')
-		.controller('LoginCtrl', function ($state, $scope, User, UserService, CoreService) {
+		.controller('LoginCtrl', function ($state, $scope, User, UserService, CoreService, LoopBackAuth) {
 			$scope.user = {};
 			$scope.formFields = UserService.getLoginFormFields();
 			$scope.formOptions = {};
