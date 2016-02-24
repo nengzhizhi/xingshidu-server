@@ -16,11 +16,12 @@
           </tr>
           <tr ng-repeat="interaction in ctrl.interactions">
             <td><a ui-sref="app.shop.edit({ id: interaction.shop.id })">{{interaction.shop.name}}</a></td>
-            <td>{{interaction}}</td>
+            <td>{{}}</td>
             <td></td>
             <td></td>
             <td>{{interaction.status}}</td>
             <td>
+              <a ng-click="ctrl.closeInteraction(interaction)" class="btn btn-danger">停止</a>
               <!-- <a ng-click="ctrl.deleteInteraction({ id: interaction.id })" class="btn btn-danger">停止</a> -->
             </td>
           </tr>

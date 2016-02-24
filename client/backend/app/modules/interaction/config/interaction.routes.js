@@ -14,13 +14,13 @@
           templateUrl: 'modules/interaction/views/list.html',
           controllerAs: 'ctrl',
           controller: function (InteractionService, interactions, $state) {
-            console.log(interactions);
             this.interactions = interactions;
-            // this.deleteInteraction = function (interactionId) {
-            //   InteractionService.deleteInteraction(interactionId, function () {
-            //     $state.go($state.current, {}, {reload: true});
-            //   })
-            // }
+
+            this.closeInteraction = function (instance) {
+              InteractionService.closeInteraction(instance, function () {
+                $state.go($state.current, {}, {reload: true});
+              })
+            }
           },
           resolve: {
             interactions: function (InteractionService) {

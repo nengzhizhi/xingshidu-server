@@ -11,14 +11,23 @@
         }).$promise;
       }
 
-      this.deleteInteraction = function (id) {
-        CoreService.confirm('确定删除？', '删除后无法恢复', function () {
-					Interaction.deleteById(id).$promise.then(function () {
-						CoreService.alertSuccess('删除成功！', '', successCb);
-					}, function (err) {
-						CoreService.alertError('删除失败！', err, cancelCb);
-					});
-				})
+      this.closeInteraction = function (instance, successCb, cancelCb) {
+        instance.status = 'closed';
+        Interaction.upsert(instance).$promise.then(function () {
+          CoreService.alertSuccess('停止成功！', '', successCb);
+        }, function (err) {
+          CoreService.alertError('停止失败！', err, cancelCb);
+        })
       }
+
+      // this.deleteInteraction = function (id) {
+      //   CoreService.confirm('确定删除？', '删除后无法恢复', function () {
+			// 		Interaction.deleteById(id).$promise.then(function () {
+			// 			CoreService.alertSuccess('删除成功！', '', successCb);
+			// 		}, function (err) {
+			// 			CoreService.alertError('删除失败！', err, cancelCb);
+			// 		});
+			// 	})
+      // }
     })
 })();

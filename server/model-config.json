@@ -2,11 +2,13 @@
   "_meta": {
     "sources": [
       "../common/models",
-      "./models"
+      "./models",
+      "../node_modules/loopback-component-passport/lib/models"
     ],
     "mixins": [
       "../common/mixins",
-      "./mixins"
+      "./mixins",
+      "../node_modules/loopback-component-passport/lib/models"
     ]
   },
   "user": {
@@ -17,6 +19,14 @@
     "dataSource": "db",
     "public": false
   },
+  "userCredential": {
+    "dataSource": "db",
+    "public": true
+  },
+  "userIdentity": {
+    "dataSource": "db",
+    "public": true
+  },  
   "ACL": {
     "dataSource": "db",
     "public": false

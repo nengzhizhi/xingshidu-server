@@ -19,5 +19,23 @@
 						})
 					}
 				})
+				.state('app.users', {
+					abstract: true,
+					url: '/user',
+					templateUrl: 'modules/users/views/main.html'
+				})
+				.state('app.users.list', {
+					url: '/list',
+					templateUrl: 'modules/users/views/list.html',
+					controllerAs: 'ctrl',
+					controller: function (users) {
+						this.users = users;
+					},
+					resolve: {
+						users: function (User) {
+							return User.find().$promise;
+						}
+					}
+				})
 		})
 })();
