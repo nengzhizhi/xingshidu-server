@@ -12,5 +12,6 @@
 			'com.module.users',
 			'com.module.shop',
 			'com.module.interaction',
+			'com.module.setting'
 		]);
 })();

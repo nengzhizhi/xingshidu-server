@@ -1,6 +1,8 @@
 module.exports = function (app) {
   var loopback = require('loopback');
   var bodyParser = require('body-parser');
+  var WeixinStrategy = require('passport-weixin');
+  var OpenIDStrategy = require('passport-openid').Strategy;
 
   // to support JSON-encoded bodies
   app.use(bodyParser.json());
@@ -34,7 +36,7 @@ module.exports = function (app) {
     var passportConfigurator = new PassportConfigurator(app);
 
     //Step 1
-    passportConfigurator.init();
+    var passport = passportConfigurator.init();
 
     //Step 2
     passportConfigurator.setupModels({
@@ -51,4 +53,31 @@ module.exports = function (app) {
     }
   }
 
+  //FIXME
+  var userIdentityModel = app.models.userIdentity;
+  app.post('/auth/weixin/openid', function (req, res) {
+    if (!req.body || !req.body.profile) {
+      return res.end(new Error('参数错误！'));
+    }
+
+    userIdentityModel.login('weixin-openid', 'oAuth 2.0', req.body.profile, {
+      accessToken: req.body.accessToken,
+      refreshToken: req.body.refreshToken
+    }, {
+      autoLogin: true
+    }, function (err, user, identity, token) {
+      if (!!err) {
+        res.end(JSON.stringify(err));
+      } else {
+        res.end(JSON.stringify({
+          accessToken: token.id
+        }));
+      }
+    })
+  })
+  // var accessTokenModel = app.models.accessToken;
+  // app.get('/auth/account', function (req, res) {
+  //   accessTokenModel.findOne({ id: req.query.accessToken }, {})
+  //
+  // });
 }

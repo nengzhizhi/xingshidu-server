@@ -20,6 +20,7 @@
     "loopback-connector-mongodb": "^1.13.3",
     "loopback-datasource-juggler": "^2.39.0",
     "passport-local": "^1.0.0",
+    "passport-openid": "^0.4.0",
     "passport-weixin": "0.0.3",
     "serve-favicon": "^2.0.1",
     "socket.io": "^1.4.5"
@@ -31,5 +32,5 @@
     "type": "",
     "url": ""
   },
-  "description": "panorama-server"
+  "description": "xingshidu-server"
 }

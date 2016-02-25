@@ -28,24 +28,6 @@ module.exports = function (Interaction) {
     ], function (err, result) {
       cb(err, result);
     })
-    //
-    //
-    // Interaction.findOne({
-    //   status: 'present',
-    //   shopId: shopId
-    // }, function (err, interaction) {
-    //   if (!!err)
-    //     return cb(err);
-    //
-    //   if (!!interaction)
-    //     return cb(new Error('直播进行中'));
-    //
-    //   Interaction.create({
-    //     shopId: shopId,
-    //     status: 'present',
-    //     created: Date.now()
-    //   }, cb);
-    // })
   }
 
   Interaction.remoteMethod('start', {
@@ -55,6 +37,43 @@ module.exports = function (Interaction) {
     returns: {arg: 'result', type: 'object'},
     http: { path: '/start', verb: 'post' }
   })
-
 //------------------------------------------------------------------------------
+  Interaction.close = function (id, cb) {
+    async.waterfall([
+      function findInteraction (next) {
+        Interaction.findOne({ id: id }, next);
+      }, function updateInteraction (instance, next) {
+        if (!!instance) {
+          instance.updateAttribute('status', 'closed', next);
+          Interaction.app.closeInteraction(instance.id);
+        }
+      }//TODO 关闭socketIO
+    ], function (err, result) {
+      cb(err, result);
+    })
+  }
+
+  Interaction.remoteMethod('close', {
+    accepts: [
+      { arg: 'id', type: 'string' }
+    ],
+    returns: { arg: 'result', type: 'object' },
+    http: { path: '/close', verb: 'post' }
+  })
+//---------------------------------------------------------------------------------
+
+  Interaction.serviceUsers = function (id, cb) {
+    cb(null, {
+      users: Interaction.app.getUsers()
+    });
+  }
+
+  Interaction.remoteMethod('serviceUsers', {
+    accepts: [
+      { arg: 'id', type: 'string' }
+    ],
+    returns: { arg: 'result', type: 'object' },
+    http: { path: '/serviceUsers', verb: 'post' }
+  })
+
 }

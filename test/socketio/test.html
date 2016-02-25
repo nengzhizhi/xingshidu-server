@@ -25,15 +25,17 @@ function sendMessage(){
 }
 
 var socket = io('http://localhost:3003');
-// socket.on('connected', function (data) {
-//   console.log('connected');
-  socket.emit('join room', {
-    interactionId: 'xxxx',
-    nickname: nickname,
-    avatar: avatar,
-    userId: userId
-  });
-// })
+
+socket.emit('join interaction', {
+  interactionId: 'xxxx',
+  nickname: nickname,
+  avatar: avatar,
+  userId: userId
+});
+
+socket.on('new message', function (data) {
+  console.log('new message', data);
+})
 
 socket.on('joined', function (data) {
 	console.log('joined', data);

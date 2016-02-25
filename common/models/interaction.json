@@ -55,6 +55,13 @@
       "principalType": "ROLE",
       "principalId": "administrator",
       "permission": "ALLOW"
+    },
+    {
+      "accessType": "EXECUTE",
+      "property": "close",
+      "principalType": "ROLE",
+      "principalId": "$owner",
+      "permission": "ALLOW"
     }
   ],
   "methods": {}
