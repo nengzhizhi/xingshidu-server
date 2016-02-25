@@ -20,6 +20,11 @@
         })
       }
 
+      this.getInteractionDetail = function (id) {
+        return {
+          users: Interaction.serviceUsers()
+        }
+      }
       // this.deleteInteraction = function (id) {
       //   CoreService.confirm('确定删除？', '删除后无法恢复', function () {
 			// 		Interaction.deleteById(id).$promise.then(function () {

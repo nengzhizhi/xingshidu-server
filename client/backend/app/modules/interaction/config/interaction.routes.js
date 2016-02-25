@@ -28,5 +28,18 @@
             }
           }
         })
+        .state('app.interaction.detail', {
+          url: '/detail/:id',
+          templateUrl: 'modules/interaction/views/detail.html',
+          controllerAs: 'ctrl',
+          controller: function (interaction) {
+            this.interaction = interaction;
+          },
+          resolve: {
+            interaction: function ($stateParams, InteractionService) {
+              return InteractionService.getInteractionDetail($stateParams.id);
+            }
+          }
+        })
     })
 })();
