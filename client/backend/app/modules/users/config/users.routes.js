@@ -37,5 +37,19 @@
 						}
 					}
 				})
+				.state('app.users.detail', {
+					url: '/detail/:id',
+					templateUrl: 'modules/users/views/detail.html',
+					controllerAs: 'ctrl',
+					controller: function (UserService, user) {
+						this.user = user;
+						this.showIdentities = !!this.user.identities;
+					},
+					resolve: {
+						user: function ($stateParams, UserService) {
+							return UserService.userDetail($stateParams.id);
+						}
+					}
+				})
 		})
 })();

@@ -8,21 +8,34 @@
         添加店铺<i class="fa fa-plus"></i>
       </a>
 
-      <table class="table table-hover">
+      <table class="table">
         <tbody>
           <tr>
-            <th>店铺名</th>
-            <th>RTMP地址</th>
-            <th>HLS地址</th>
-            <th>FLV地址</th>
+            <th>店铺</th>
+            <th></th>
             <th>操作</th>
           </tr>
           <tr ng-repeat="shop in ctrl.shops">
             <td><a ui-sref="app.shop.edit({ id: shop.id })">{{shop.name}}</a></td>
-            <td></td>
-            <td></td>
-            <td></td>
             <td>
+              <table class="table table-bordered">
+                <tr>
+                  <th>RTMP地址</th>
+                  <td>{{shop.rtmp_url}}</td>
+                </tr>
+                <tr>
+                  <th>HLS地址</th>
+                  <td>{{shop.hls_url}}</td>
+                </tr>
+                <tr>
+                  <th>FLV地址</th>
+                  <td>{{shop.flv_url}}</td>
+                </tr>                
+              </table>
+
+            </td>
+            <td>
+              <a ui-sref="app.shop.edit({ id: shop.id })" class="btn btn-primary">编辑</a>
               <a ng-click="ctrl.deleteShop({ id: shop.id })" class="btn btn-danger">删除</a>
             </td>
           </tr>

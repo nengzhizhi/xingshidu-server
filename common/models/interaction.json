@@ -7,7 +7,10 @@
       "required": true
     },
     "created": {
-      "type": "date"
+      "type": "number"
+    },
+    "closed": {
+      "type": "number"
     }
   },
   "validations": [],
@@ -32,17 +35,17 @@
       "permission": "DENY"
     },
     {
-      "accessType": "WRITE",
-      "principalType": "ROLE",
-      "principalId": "$owner",
-      "permission": "ALLOW"
-    },
-    {
       "accessType": "READ",
       "principalType": "ROLE",
       "principalId": "$everyone",
       "permission": "ALLOW"
     },
+    {
+      "accessType": "WRITE",
+      "principalType": "ROLE",
+      "principalId": "$owner",
+      "permission": "ALLOW"
+    },    
     {
       "accessType": "WRITE",
       "principalType": "ROLE",
@@ -62,7 +65,21 @@
       "principalType": "ROLE",
       "principalId": "$owner",
       "permission": "ALLOW"
-    }
+    },
+    {
+      "accessType": "EXECUTE",
+      "property": "start",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW"
+    },
+    {
+      "accessType": "EXECUTE",
+      "property": "detail",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW"
+    }            
   ],
   "methods": {}
 }

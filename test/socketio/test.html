@@ -1,16 +1,9 @@
+<meta charset="utf-8">
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="socket.io-1.4.5.js"></script>
 <script type="text/javascript">
-// var socket = io.connect('http://120.27.138.242:3003');
-// socket.on('connect', function(){
-// 	socket.emit('join', { username: 'xxx'});
-// })
-//
-// socket.on('danmu', function(data){
-// 	console.log(data);
-// })
-//
-var interactionId = 'interaction-id';
+
+var interactionId = '56cd1d820cbf32541c3ce3bb';
 var nickname = "打地鼠";
 var avatar = "http://xxxx.png";
 var userId = Math.random();
@@ -24,10 +17,10 @@ function sendMessage(){
   })
 }
 
-var socket = io('http://localhost:3003');
+var socket = io('http://112.124.117.146:3003');
 
 socket.emit('join interaction', {
-  interactionId: 'xxxx',
+  interactionId: interactionId,
   nickname: nickname,
   avatar: avatar,
   userId: userId

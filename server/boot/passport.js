@@ -55,12 +55,24 @@ module.exports = function (app) {
 
   //FIXME
   var userIdentityModel = app.models.userIdentity;
-  app.post('/auth/weixin/openid', function (req, res) {
-    if (!req.body || !req.body.profile) {
-      return res.end(new Error('参数错误！'));
+  app.post('/auth/openid', function (req, res) {
+    if (!req.body || !req.body.profile || !req.body.accessToken) {
+      return res.end(JSON.stringify({
+        name: "登录错误",
+        status: 500,
+        message: "参数错误！"
+      }));
     }
 
-    userIdentityModel.login('weixin-openid', 'oAuth 2.0', req.body.profile, {
+    if (req.body.provider != 'weixin') {
+      return res.end(JSON.stringify({
+        name: "登录错误",
+        status: 500,
+        message: "只支持微信登录！"
+      }));
+    }
+
+    userIdentityModel.login(req.body.provider, 'oAuth 2.0', req.body.profile, {
       accessToken: req.body.accessToken,
       refreshToken: req.body.refreshToken
     }, {
@@ -70,14 +82,10 @@ module.exports = function (app) {
         res.end(JSON.stringify(err));
       } else {
         res.end(JSON.stringify({
-          accessToken: token.id
+          accessToken: token.id,
+          userId: user.id
         }));
       }
     })
   })
-  // var accessTokenModel = app.models.accessToken;
-  // app.get('/auth/account', function (req, res) {
-  //   accessTokenModel.findOne({ id: req.query.accessToken }, {})
-  //
-  // });
 }

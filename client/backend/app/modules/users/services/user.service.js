@@ -7,6 +7,15 @@
         return User.getCurrent(successCb, errorCb);
       }
 
+      this.userDetail = function (userId) {
+        return User.findOne({
+          filter: {
+            where: { id: userId },
+            include: 'identities'
+          }
+        }).$promise;  
+      }
+
       this.getLoginFormFields = function () {
         var loginForm = [
           {

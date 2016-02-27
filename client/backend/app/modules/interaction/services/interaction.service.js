@@ -6,7 +6,7 @@
       this.getInteractions = function () {
         return Interaction.find({
           filter: {
-            include: { relation: 'shop' }
+            include: ['shop', 'creater']
           }
         }).$promise;
       }
@@ -21,18 +21,17 @@
       }
 
       this.getInteractionDetail = function (id) {
-        return {
-          users: Interaction.serviceUsers()
-        }
+        return Interaction.serviceUsers({id: id}).$promise;
+
+
+        // Interaction.serviceUsers({id: id}, function (err, result) {
+        //   console.log(err, result);
+        // })
+
+        // console.log(Interaction.serviceUsers({ id :id }));
+        // return {
+        //   users: Interaction.serviceUsers({ id :id }).$promise.result
+        // }
       }
-      // this.deleteInteraction = function (id) {
-      //   CoreService.confirm('确定删除？', '删除后无法恢复', function () {
-			// 		Interaction.deleteById(id).$promise.then(function () {
-			// 			CoreService.alertSuccess('删除成功！', '', successCb);
-			// 		}, function (err) {
-			// 			CoreService.alertError('删除失败！', err, cancelCb);
-			// 		});
-			// 	})
-      // }
     })
 })();

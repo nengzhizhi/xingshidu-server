@@ -14,14 +14,14 @@ module.exports = function (app) {
 	this.closeInteraction = function (id) {
 		var self = this;
 		if (!!self.interactions[id]) {
-			self.io.to(id).emit('close interaction');
+			self.io.to(id).emit('close interaction', { id: id });
 			delete self.interactions[id];
 		}
 	}
 
 	this.getUsers = function (id) {
 		var self = this;
-		return self.interactions[id] || [];
+		return _.values(self.interactions[id]) || [];
 	}
 
 	var self = this;
@@ -65,5 +65,5 @@ module.exports = function (app) {
 
 	this.io.listen(config.interactionServicePort);
 	console.log('start interaction service on: ', config.interactionServicePort);
-	app.instanceService = this;
+	app.interactionService = this;
 }

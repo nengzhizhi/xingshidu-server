@@ -1,12 +1,12 @@
 {
   "restApiRoot": "/api",
-  "host": "127.0.0.1",
+  "host": "0.0.0.0",
   "port": 3000,
   "interactionServicePort": 3003,
   "cookieSecret": "246bace2-38cb-4138-85d9-0ae8160b07c8",
   "remoting": {
     "context": {
-      "enableHttpContext": false
+      "enableHttpContext": true
     },
     "rest": {
       "normalizeHttpPath": false,

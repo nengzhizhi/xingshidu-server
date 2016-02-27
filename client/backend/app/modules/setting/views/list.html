@@ -4,7 +4,7 @@
       <h3 class="box-title">配置管理</h3>
     </div>
     <div class="box-body table-responsive">
-      <a ui-sref="app.shop.add" class="btn btn-success btn-block">
+      <a ui-sref="app.setting.add" class="btn btn-success btn-block">
         添加配置<i class="fa fa-plus"></i>
       </a>
 
@@ -16,10 +16,10 @@
             <th>操作</th>
           </tr>
           <tr ng-repeat="setting in ctrl.settings">
-            <td><a ui-sref="app.settings.edit({ id: settings.id })">{{settings.key}}</a></td>
-            <td>{{settings.value}}</td>
+            <td><a ui-sref="app.settings.edit({ id: setting.id })">{{setting.key}}</a></td>
+            <td>{{setting.value}}</td>
             <td>
-              <a ng-click="" class="btn btn-danger">删除</a>
+              <a ui-sref="app.settings.delete({ id: setting.id })" class="btn btn-danger">删除</a>
             </td>
           </tr>
         </tbody>
