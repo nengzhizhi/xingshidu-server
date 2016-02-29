@@ -5,6 +5,31 @@ var loopback = require('loopback');
 module.exports = function (Interaction) {
   Interaction.validatesInclusionOf('status', { in: ['present', 'closed'] });
 
+  // Interaction.status = function (shopId, cb) {
+  //   Interaction.findOne({
+  //     where: {
+  //       status: 'present',
+  //       shopId: shopId
+  //     }
+  //   }, function (err, instance) {
+  //     if (!!instance) {
+  //       cb(err, { status: 'busy' });
+  //     } else {
+  //       cb(err, { status: 'empty' })
+  //     }
+  //   })
+  // }
+
+  // Interaction.remoteMethod('status', {
+  //   accepts: [
+  //     { arg: 'shopId', type: 'string' }
+  //   ],
+  //   returns: { root: true },
+  //   http: { path: '/status', verb: 'post' }     
+  // })
+
+//------------------------------------------------------------------
+
   Interaction.start = function (shopId, cb) {
     async.waterfall([
       function findCurrentInteraction (next) {

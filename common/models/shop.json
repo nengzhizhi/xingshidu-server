@@ -24,7 +24,8 @@
     "interaction": {
       "type": "hasMany",
       "model": "Interaction",
-      "foreignKey": "shopId"
+      "foreignKey": "shopId",
+      "required": true
     }
   },
   "acls": [],

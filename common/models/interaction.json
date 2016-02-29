@@ -79,7 +79,14 @@
       "principalType": "ROLE",
       "principalId": "$everyone",
       "permission": "ALLOW"
-    }            
+    },
+    {
+      "accessType": "EXECUTE",
+      "property": "status",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW"
+    }                
   ],
   "methods": {}
 }
