@@ -5,7 +5,9 @@ var config = require('../config.json');
 //instance
 module.exports = function (app) {
 	this.interactions = [];
+	this.creaters = [];
 	this.io = new socketIO();
+	var interactionModel = app.models.Interaction;
 
 	this.getRevealedUsers = function (users, number) {
 		return _.takeRight( _.toArray(users), number);
@@ -16,7 +18,16 @@ module.exports = function (app) {
 		if (!!self.interactions[id]) {
 			self.io.to(id).emit('close interaction', { id: id });
 			delete self.interactions[id];
+			delete self.creaters[id];
 		}
+	}
+
+	this.setInteractionCreater = function (id, userId) {
+		var self = this;
+		if (!self.interactions[id]) {
+			self.interactions[id] = {};
+		}
+		self.creaters[id] = userId;
 	}
 
 	this.getUsers = function (id) {
@@ -27,6 +38,12 @@ module.exports = function (app) {
 	var self = this;
 	this.io.on('connection', function (socket) {
 		socket.on('join interaction', function (data) {
+			console.log('join interaction:', data);
+			
+			//FIXME 检查输入参数
+			if (!data.interactionId)
+				return;
+
 			if (!self.interactions[data.interactionId]) {
 				self.interactions[data.interactionId] = {};
 			}
@@ -58,8 +75,26 @@ module.exports = function (app) {
 		})
 
     socket.on('disconnect', function(data) {
-      if (!!self.interactions[socket.interactionId] && !!self.interactions[socket.interactionId][socket.id])
-        delete self.interactions[socket.interactionId][socket.id];
+    	var interaction = self.interactions && self.interactions[socket.interactionId];
+    	if (!interaction)
+    		return;
+
+    	//console.log(socket.interactionId, interaction);
+    	//console.log(interaction[socket.id].userId, self.creaters[socket.interactionId]);
+      
+      if (!!interaction && !!interaction[socket.id]) {
+				if (interaction[socket.id].userId == self.creaters[socket.interactionId]) {
+					interactionModel.close(socket.interactionId, function (err, result) {});
+					return;
+				}
+
+				delete self.interactions[socket.interactionId][socket.id];
+
+				self.io.to(data.interactionId).emit('left', {
+					userNumber: _.size(interaction),
+					revealedUsers: self.getRevealedUsers(interaction, 10)
+				})
+      }
     })		
 	})
 

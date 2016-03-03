@@ -12,11 +12,14 @@
       }
 
       this.closeInteraction = function (instance, successCb, cancelCb) {
-        instance.status = 'closed';
-        Interaction.upsert(instance).$promise.then(function () {
+        Interaction.updateAll({
+          where: { id: instance.id }
+        }, {
+          status: 'closed'
+        }).$promise.then(function () {
           CoreService.alertSuccess('停止成功！', '', successCb);
         }, function (err) {
-          CoreService.alertError('停止失败！', err, cancelCb);
+          CoreService.alertError('停止不了！', err, cancelCb);
         })
       }
 

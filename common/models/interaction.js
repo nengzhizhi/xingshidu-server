@@ -5,31 +5,6 @@ var loopback = require('loopback');
 module.exports = function (Interaction) {
   Interaction.validatesInclusionOf('status', { in: ['present', 'closed'] });
 
-  // Interaction.status = function (shopId, cb) {
-  //   Interaction.findOne({
-  //     where: {
-  //       status: 'present',
-  //       shopId: shopId
-  //     }
-  //   }, function (err, instance) {
-  //     if (!!instance) {
-  //       cb(err, { status: 'busy' });
-  //     } else {
-  //       cb(err, { status: 'empty' })
-  //     }
-  //   })
-  // }
-
-  // Interaction.remoteMethod('status', {
-  //   accepts: [
-  //     { arg: 'shopId', type: 'string' }
-  //   ],
-  //   returns: { root: true },
-  //   http: { path: '/status', verb: 'post' }     
-  // })
-
-//------------------------------------------------------------------
-
   Interaction.start = function (shopId, cb) {
     async.waterfall([
       function findCurrentInteraction (next) {
@@ -61,6 +36,8 @@ module.exports = function (Interaction) {
           created: new Date(),
           userId: user && user.userId
         }, function (err, interaction) {
+          Interaction.app.interactionService.setInteractionCreater(interaction.id, user.userId);
+
           next(err, {
             interaction: interaction,
             shop: shop
@@ -83,7 +60,9 @@ module.exports = function (Interaction) {
   Interaction.close = function (id, cb) {
     async.waterfall([
       function findInteraction (next) {
-        Interaction.findOne({ id: id }, next);
+        Interaction.findOne({ 
+          where: { id: id }
+        }, next);
       }, function updateInteraction (instance, next) {
         if (!!instance) {
           instance.updateAttributes({
@@ -119,10 +98,36 @@ module.exports = function (Interaction) {
   })
 //----------------------------------------------------------------------------------  
   Interaction.detail = function (id, cb) {
-    Interaction.findOne({
-      where: { id: id },
-      include: 'shop'
-    }, cb);
+    var userIdentityModel = Interaction.app.models.userIdentity;
+
+    async.waterfall([
+      function findInteraction (next) {
+        Interaction.findOne({
+          where: { id: id },
+          include: 'shop'
+        }, next);
+      }, function getUserProfile(interaction, next) {
+        if (!interaction || !interaction.userId) {
+          return next(new Error('无效的id!'));
+        }
+
+        userIdentityModel.findOne({
+          where: { userId: interaction.userId }
+        }, function (err, userIdentity) {
+          if (!!userIdentity && !!userIdentity.provider && !!userIdentity.profile) {
+            if (userIdentity.provider == 'weixin') {
+              interaction.__data.creater = {
+                nickname: userIdentity.profile.nickname,
+                headimgurl: userIdentity.profile.headimgurl
+              }
+            }
+          }
+          next(err, interaction);
+        })
+      }
+    ], function (err, result) {
+      cb(err, result);
+    })
   }
 
   Interaction.remoteMethod('detail', {

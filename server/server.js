@@ -6,9 +6,9 @@ var bodyParser = require('body-parser');
 var app = module.exports = loopback();
 
 //path for angular client
-app.use(loopback.static(path.resolve(__dirname, '../client/backend/app')));
+app.use(loopback.static(path.resolve(__dirname, '../client/angular-wx-admin/app')));
 //path for bower_components
-app.use(loopback.static(path.resolve(__dirname, '../client/backend/')));
+app.use(loopback.static(path.resolve(__dirname, '../client/angular-wx-admin/')));
 
 // to support JSON-encoded bodies
 app.use(bodyParser.json());

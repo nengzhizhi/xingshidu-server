@@ -7,8 +7,9 @@ module.exports = function (Shop) {
 				Shop.findById(id, next);
 			}, function interactionStatus (shop, next) {
 				if (!shop) {
-					next(new Error('无效的店铺编号！'));
+					return next(new Error('无效的店铺编号！'));
 				}
+				
 				shop.interaction.findOne({
 					where: {
 						status: 'present'
