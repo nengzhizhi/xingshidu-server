@@ -1,6 +1,33 @@
+<div class="head">
+	<div class="head_box">
+		<div class="inner wrp">
+			<h1 class="logo">
+			<a href="/" title="微信公众平台"></a></h1>
+			<div class="account"></div>
+		</div>
+	</div>
+</div>
+
 <div class="body">
 	<div class="container_box cell_layout side_l">
 		<div class="col_side">
+			<div class="menu_bar">
+				<dl class="menu_no_extra">
+					<dt class="menu_title">
+      			<i class="icon_menu" style="background:url(https://res.wx.qq.com/mpres/htmledition/images/icon/menu/icon_menu_function.png) no-repeat;"></i>店铺管理
+          </dt>
+					<dd class="menu_item ">
+						<a ui-sref="app.shops.list">店铺列表</a>
+					</dd>
+				</dl>
+				<dl class="menu ">
+				<dt class="menu_title clickable">
+				  <a href="#">
+				  	<i class="icon_menu" style="background:url(https://res.wx.qq.com/mpres/htmledition/images/icon/menu/icon_menu_wxpay_v2.png) no-repeat;"></i>支付管理
+				  </a>
+				</dt> 
+				</dl>
+			</div>
 		</div>
 		<div class="col_main">
 			<div ui-view></div>

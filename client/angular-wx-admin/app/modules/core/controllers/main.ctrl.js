@@ -3,6 +3,7 @@
 	angular
 		.module('com.module.core')
 		.controller('MainCtrl', function ($scope, $rootScope) {
-			console.log('MainCtrl');
+			//$location.path('/app');
+			
 		});
 })();

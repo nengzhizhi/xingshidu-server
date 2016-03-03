@@ -3,6 +3,6 @@
 	angular
 		.module('com.module.core')
 		.controller('RouteCtrl', function ($location) {
-			$location.path('/app');
+			$location.path('/app/home');
 		})
 })();

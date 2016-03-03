@@ -2,13 +2,20 @@
 	<thead class="thead">
 		<tr>
 			<th class="table_cell">序号</th>
+			<th class="table_cell">店铺名称</th>
 			<th class="table_cell">店铺ID</th>
+			<th class="table_cell">操作</th>
 		</tr>
 	</thead>
 	<tbody class="tbody">
 		<tr ng-repeat="shop in ctrl.shops">
-			<td class="table_cell">{{shop.id}}</td>
 			<td class="table_cell"></td>
+			<td class="table_cell">{{shop.name}}</td>
+			<td class="table_cell">{{shop.id}}</td>
+			<td class="table_cell">
+				<a ui-sref="app.shops.edit(shop.id)">编辑</a>
+				<a ui-sref="app.shops.edit(shop.id)">删除</a>
+			</td>
 		</tr>
 	</tbody>
 </table>
