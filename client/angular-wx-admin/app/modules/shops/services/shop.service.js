@@ -30,25 +30,23 @@
 			}
 
 			this.getShopInteraction = function (id) {
-				return Shop.interaction({ 
-					id: id,
-					filter: { 
-						where: { status: 'present' }
+				return Interaction.findOne({
+					filter: {
+						where: { shopId: '123' }
 					}
 				}).$promise;
 			}
 
 			this.closeInteraction = function (id, successCb, cancelCb) {
-				console.log(id);
-				Interaction.updateAll({
-					where: { id: id }
-				}, {
-					status: 'closed'
-				}).$promise.then(function () {
-					CoreService.alertSuccess('停止成功！', '', successCb);
-				}, function (err) {
-					CoreService.alertError('停止不了！', err.statusText, cancelCb);
-				})
+				// Interaction.updateAll({
+				// 	where: { id: id }
+				// }, {
+				// 	status: 'closed'
+				// }).$promise.then(function () {
+				// 	CoreService.alertSuccess('停止成功！', '', successCb);
+				// }, function (err) {
+				// 	CoreService.alertError('停止不了！', err.statusText, cancelCb);
+				// })
 			}
 
 			this.getFormFields = function () {

@@ -73,23 +73,24 @@
 					templateUrl: 'modules/shops/views/detail.html',
 					controllerAs: 'ctrl',
 					controller: function ($stateParams, interaction, ShopService) {
-						this.interaction = interaction && interaction[0];
-						this.living = interaction && interaction.length > 0;
+						console.log(interaction);
+						//console.log(interaction[0]);
+						// this.interaction = interaction && interaction[0];
+						// this.living = interaction && interaction.length > 0;
 
-						// this.start = function () {
-						// 	// ShopService.startInteraction($stateParams.id, function () {
-						// 	// 	$state.go($state.current, {}, {reload: true});
-						// 	// });
-						// },
-						this.close = function (id) {
-							ShopService.closeInteraction(id, function () {
-								$state.go($state.current, {}, {reload: true});
-							});
+						this.close = function(){
+
 						}
+						// this.close = function (id) {
+						// 	ShopService.closeInteraction(id, function () {
+						// 		$state.go($state.current, {}, {reload: true});
+						// 	});
+						// }
 					},
 					resolve: {
 						interaction: function ($stateParams, ShopService) {
 							return ShopService.getShopInteraction($stateParams.id);
+
 						}
 					}
 				})

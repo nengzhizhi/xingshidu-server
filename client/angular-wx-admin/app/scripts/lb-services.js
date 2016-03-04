@@ -3702,11 +3702,6 @@ module.factory(
          *
          * @param {Object=} parameters Request parameters.
          *
-         *   This method does not accept any parameters.
-         *   Supply an empty object or omit this argument altogether.
-         *
-         * @param {Object} postData Request data.
-         *
          *  - `shopId` – `{string=}` - 
          *
          * @param {function(Object,Object)=} successCb
@@ -3719,13 +3714,14 @@ module.factory(
          *   populated with the actual data once the response is returned
          *   from the server.
          *
-         * Data properties:
-         *
-         *  - `result` – `{object=}` - 
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Interaction` object.)
+         * </em>
          */
         "start": {
           url: urlBase + "/Interactions/start",
-          method: "POST"
+          method: "GET"
         },
 
         /**
@@ -3758,9 +3754,10 @@ module.factory(
          *   populated with the actual data once the response is returned
          *   from the server.
          *
-         * Data properties:
-         *
-         *  - `result` – `{object=}` - 
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Interaction` object.)
+         * </em>
          */
         "close": {
           url: urlBase + "/Interactions/close",
@@ -3799,10 +3796,50 @@ module.factory(
          *
          * Data properties:
          *
-         *  - `result` – `{object=}` - 
+         *  - `users` – `{*=}` - 
          */
         "serviceUsers": {
           url: urlBase + "/Interactions/serviceUsers",
+          method: "POST"
+        },
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Interaction#detail
+         * @methodOf lbServices.Interaction
+         *
+         * @description
+         *
+         * <em>
+         * (The remote method definition does not provide any description.)
+         * </em>
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *   This method does not accept any parameters.
+         *   Supply an empty object or omit this argument altogether.
+         *
+         * @param {Object} postData Request data.
+         *
+         *  - `id` – `{string=}` - 
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Interaction` object.)
+         * </em>
+         */
+        "detail": {
+          url: urlBase + "/Interactions/detail",
           method: "POST"
         },
 
@@ -4629,6 +4666,41 @@ module.factory(
         "createChangeStream": {
           url: urlBase + "/Shops/change-stream",
           method: "POST"
+        },
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Shop#detail
+         * @methodOf lbServices.Shop
+         *
+         * @description
+         *
+         * <em>
+         * (The remote method definition does not provide any description.)
+         * </em>
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{string=}` - 
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Shop` object.)
+         * </em>
+         */
+        "detail": {
+          url: urlBase + "/Shops/detail",
+          method: "GET"
         },
 
         // INTERNAL. Use Interaction.shop() instead.
@@ -5527,6 +5599,46 @@ module.factory(
          */
         "createChangeStream": {
           url: urlBase + "/settings/change-stream",
+          method: "POST"
+        },
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Setting#key
+         * @methodOf lbServices.Setting
+         *
+         * @description
+         *
+         * <em>
+         * (The remote method definition does not provide any description.)
+         * </em>
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *   This method does not accept any parameters.
+         *   Supply an empty object or omit this argument altogether.
+         *
+         * @param {Object} postData Request data.
+         *
+         *  - `key` – `{string=}` - 
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Setting` object.)
+         * </em>
+         */
+        "key": {
+          url: urlBase + "/settings/key",
           method: "POST"
         },
       }
