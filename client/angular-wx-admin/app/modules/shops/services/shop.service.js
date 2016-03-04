@@ -32,7 +32,7 @@
 			this.getShopInteraction = function (id) {
 				return Interaction.findOne({
 					filter: {
-						where: { shopId: '123' }
+						where: { status: 'closed' }
 					}
 				}).$promise;
 			}
