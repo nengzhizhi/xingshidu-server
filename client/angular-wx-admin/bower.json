@@ -7,10 +7,11 @@
     "angular-cookies": "^1.4.0",
     "angular-resource": "^1.4.0",
     "angular-route": "^1.4.0",
+    "angular-sweetalert": "1.0.3",
     "angular-sanitize": "^1.4.0",
     "angular-touch": "^1.4.0",
     "angular-ui-router": "~0.2.18",
-    "angular-formly": "~7.5.2",
+    "angular-formly": "~7.3.9",
     "api-check": "~7.5.5"
   },
   "devDependencies": {

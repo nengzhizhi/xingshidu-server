@@ -1269,7 +1269,7 @@ body.scaled {
 
 .icon_search_del {
 	cursor: pointer;
-	background: url("./images/base/base.png") 0 -390px no-repeat;
+	background: url("../images/base/base.png") 0 -390px no-repeat;
 	width: 14px;
 	height: 14px;
 	vertical-align: middle;
@@ -1277,7 +1277,7 @@ body.scaled {
 }
 
 .icon_search_del:hover {
-	background: url("./images/base/base.png") 0 -414px no-repeat
+	background: url("../images/base/base.png") 0 -414px no-repeat
 }
 
 .frm_legend.default {
@@ -2486,11 +2486,11 @@ button.btn {
 }
 
 .btn.btn_add .add_gray:hover {
-	background: url("./images/base/base.png") 0 -554px no-repeat
+	background: url("../images/base/base.png") 0 -554px no-repeat
 }
 
 .btn.btn_disabled .add_white {
-	background: url("./images/base/base.png") 0 -578px no-repeat
+	background: url("../images/base/base.png") 0 -578px no-repeat
 }
 
 .btn.btn_small {
@@ -4458,14 +4458,14 @@ button.btn {
 	padding-left: 41px;
 	width: 121px;
 	margin: 0 auto;
-	background: url("./images/base/base.png") 0 -3315px no-repeat;
+	background: url("../images/base/base.png") 0 -3315px no-repeat;
 	cursor: pointer
 }
 
 .menu_plugins .btn_plugins_add:hover {
 	text-decoration: none;
 	color: #222;
-	background: url("./images/base/base.png") 0 -3359px no-repeat
+	background: url("../images/base/base.png") 0 -3359px no-repeat
 }
 
 .menu_plugins .btn_plugins_add i {
@@ -4763,15 +4763,15 @@ button.btn {
 }
 
 .icon14_common.add_white {
-	background: url("./images/base/base.png") 0 -3614px no-repeat
+	background: url("../images/base/base.png") 0 -3614px no-repeat
 }
 
 .icon14_common.add_gray {
-	background: url("./images/base/base.png") 0 -3638px no-repeat
+	background: url("../images/base/base.png") 0 -3638px no-repeat
 }
 
 .icon14_common.add_gray:hover {
-	background: url("./images/base/base.png") 0 -3662px no-repeat
+	background: url("../images/base/base.png") 0 -3662px no-repeat
 }
 
 .icon14_common.edit_gray {
@@ -4896,11 +4896,11 @@ a:hover .icon14_common.switch_gray {
 }
 
 .icon16_common.del_gray {
-	background: url("./images/base/base.png") 0 -4369px no-repeat
+	background: url("../images/base/base.png") 0 -4369px no-repeat
 }
 
 .icon16_common.del_gray:hover {
-	background: url("./images/base/base.png") 0 -4395px no-repeat
+	background: url("../images/base/base.png") 0 -4395px no-repeat
 }
 
 .icon16_common.reply_gray {
@@ -4912,7 +4912,7 @@ a:hover .icon14_common.switch_gray {
 }
 
 .icon16_common.search_gray {
-	background: url("./images/base/base.png") 0 -4421px no-repeat
+	background: url("../images/base/base.png") 0 -4421px no-repeat
 }
 
 .icon16_common.sort_gray {

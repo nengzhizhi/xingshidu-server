@@ -2,7 +2,7 @@
 	'use strict';
 	angular
 		.module('com.module.shops')
-		.service('ShopService', function (CoreService, Shop) {
+		.service('ShopService', function (CoreService, Shop, Interaction) {
 			this.getShops = function () {
 				return Shop.find().$promise;
 			}
@@ -11,12 +11,44 @@
 				return Shop.findById({ id: id }).$promise;
 			}
 
-			this.update = function (shop, successCb, cancelCb) {
+			this.updateShop = function (shop, successCb, cancelCb) {
 				return Shop.upsert(shop).$promise.then(function () {
 					CoreService.alertSuccess('保存成功！', '', successCb);
 				}, function (err) {
-					CoreService.alertError('删除失败！', err, cancelCb);
+					CoreService.alertError('保存失败！', err && err.statusText, cancelCb);
 				})				
+			}
+
+			this.deleteShop = function (id, successCb, cancelCb) {
+				CoreService.confirm('确定删除？', '删除后无法恢复', function () {
+					Shop.deleteById(id).$promise.then(function () {
+						CoreService.alertSuccess('删除成功！', '', successCb);
+					}, function (err) {
+						CoreService.alertError('删除失败！', err, cancelCb);
+					});
+				})				
+			}
+
+			this.getShopInteraction = function (id) {
+				return Shop.interaction({ 
+					id: id,
+					filter: { 
+						where: { status: 'present' }
+					}
+				}).$promise;
+			}
+
+			this.closeInteraction = function (id, successCb, cancelCb) {
+				console.log(id);
+				Interaction.updateAll({
+					where: { id: id }
+				}, {
+					status: 'closed'
+				}).$promise.then(function () {
+					CoreService.alertSuccess('停止成功！', '', successCb);
+				}, function (err) {
+					CoreService.alertError('停止不了！', err.statusText, cancelCb);
+				})
 			}
 
 			this.getFormFields = function () {

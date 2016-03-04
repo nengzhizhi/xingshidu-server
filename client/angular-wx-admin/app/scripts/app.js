@@ -8,6 +8,7 @@
       'ngRoute',
       'ngSanitize',
       'ngTouch',
+      'oitozero.ngSweetAlert',
       'formly',
       'ui.router',
       'lbServices',

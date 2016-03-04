@@ -15,6 +15,11 @@
 					controllerAs: 'ctrl',
 					controller: function ($state, shops, ShopService) {
 						this.shops = shops;
+						this.deleteShop = function(id){
+							ShopService.deleteShop(id, function(){
+								$state.go($state.current, {}, {reload: true});
+							})
+						}
 					},
 					resolve: {
 						shops: function (ShopService) {
@@ -22,16 +27,37 @@
 						}
 					}
 				})
+				.state('app.shops.add', {
+					url: '/add',
+					templateUrl: 'modules/shops/views/form.html',
+					controllerAs: 'ctrl',
+					controller: function ($state, ShopService, shop) {
+						this.shop = shop;
+						this.formFields = ShopService.getFormFields();
+						this.formOptions = {};
+
+						this.submit = function () {
+							ShopService.updateShop(this.shop).then(function (shop) {
+								$state.go('app.shops.edit');
+							})
+						}												
+					},
+					resolve: {
+						shop: function () {
+
+						}
+					}
+				})
 				.state('app.shops.edit', {
 					url: '/edit/:id',
 					templateUrl: 'modules/shops/views/form.html',
 					controllerAs: 'ctrl',
-					controller: function (shop, ShopService) {
+					controller: function ($state, shop, ShopService) {
 						this.shop = shop;
 						this.formFields = ShopService.getFormFields();
 						this.formOptions = {};
 						this.submit = function () {
-							ShopService.update(this.shop).then(function () {
+							ShopService.updateShop(this.shop).then(function () {
 								$state.go($state.current, {}, { reload: true });
 							})
 						}
@@ -39,6 +65,31 @@
 					resolve: {
 						shop: function ($stateParams, ShopService) {
 							return ShopService.getShop($stateParams.id);
+						}
+					}
+				})
+				.state('app.shops.detail', {
+					url: '/detail/:id',
+					templateUrl: 'modules/shops/views/detail.html',
+					controllerAs: 'ctrl',
+					controller: function ($stateParams, interaction, ShopService) {
+						this.interaction = interaction && interaction[0];
+						this.living = interaction && interaction.length > 0;
+
+						// this.start = function () {
+						// 	// ShopService.startInteraction($stateParams.id, function () {
+						// 	// 	$state.go($state.current, {}, {reload: true});
+						// 	// });
+						// },
+						this.close = function (id) {
+							ShopService.closeInteraction(id, function () {
+								$state.go($state.current, {}, {reload: true});
+							});
+						}
+					},
+					resolve: {
+						interaction: function ($stateParams, ShopService) {
+							return ShopService.getShopInteraction($stateParams.id);
 						}
 					}
 				})

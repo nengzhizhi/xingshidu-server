@@ -1,0 +1,25 @@
+<div class="main_hd">
+	<h2>店铺管理</h2>
+</div>
+<div class="title_tab">
+	<ul class="tab_navs title_tab">
+    <li class="tab_nav first js_top selected">
+    	<a href="#">店铺详情</a>
+    </li>
+	</ul>
+</div>
+
+<div class="highlight_box">
+	<div class="opr">
+		<a class="btn btn_primary" ng-if="!ctrl.living" ng-click="ctrl.start()">开启互动</a>
+		<a class="btn btn_warn" ng-if="ctrl.living" ng-click="ctrl.close({ id: ctrl.interaction.id})">关闭互动</a>
+	</div>
+	<h4 class="title">直播状态</h4>
+	<p class="desc" ng-if="ctrl.living">正在直播中</p>
+	<p class="desc" ng-if="!ctrl.living">空闲中</p>
+</div>
+
+<div class="frm_control_group gray_desc_item" ng-if="ctrl.living">
+	<label class="frm_label">互动ID:</label>
+	<div class="frm_controls frm_vertical_pt">{{ctrl.interaction.id}}</div>
+</div>
