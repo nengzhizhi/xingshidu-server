@@ -10,5 +10,14 @@
 					controller: 'LoginCtrl',
 					controllerAs: 'ctrl'
 				})
+				.state('logout', {
+					url: '/logout',
+					controllerAs: 'ctrl',
+					controller: function (User, LoopBackAuth, $state) {
+						User.logout({ "access_token": LoopBackAuth.accessTokenId }, function () {
+							$state.go('login');
+						})
+					}
+				})
 		})
 })();

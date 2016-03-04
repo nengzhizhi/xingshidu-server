@@ -1,6 +1,6 @@
 <div class="login_panel label_input prepend open" style="margin-top:-300px;">
 	<div class="login_inner wx">
-		<form class="form login_form">
+		<form class="form login_form" ng-submit="login()">
 
 		<fieldset class="login_fieldset">
 			<legend class="login_legend">登录</legend>
@@ -36,7 +36,7 @@
 			<div class="login_valid_area"></div>
 
 			<div class="login_tool_area">
-				<a class="btn btn_primary btn_login" ng-click="login()">登录</a>
+				<button class="btn btn_primary btn_login" type="submit">登录</button>
 			</div>
 		</fieldset>
 

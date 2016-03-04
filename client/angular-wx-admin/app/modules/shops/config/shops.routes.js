@@ -22,5 +22,25 @@
 						}
 					}
 				})
+				.state('app.shops.edit', {
+					url: '/edit/:id',
+					templateUrl: 'modules/shops/views/form.html',
+					controllerAs: 'ctrl',
+					controller: function (shop, ShopService) {
+						this.shop = shop;
+						this.formFields = ShopService.getFormFields();
+						this.formOptions = {};
+						this.submit = function () {
+							ShopService.update(this.shop).then(function () {
+								$state.go($state.current, {}, { reload: true });
+							})
+						}
+					},
+					resolve: {
+						shop: function ($stateParams, ShopService) {
+							return ShopService.getShop($stateParams.id);
+						}
+					}
+				})
 		})
 })();

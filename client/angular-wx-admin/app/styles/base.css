@@ -839,7 +839,7 @@ body.scaled {
 
 .frm_label {
 	float: left;
-	width: 5em;
+	width: 10em;
 	margin-top: .3em;
 	margin-right: 1em;
 	font-size: 14px
@@ -5623,7 +5623,7 @@ body {
 }
 
 .icon_subscribe_label {
-	background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/layout_head_z26f6ea.png") 0 0 no-repeat;
+	/*background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/layout_head_z26f6ea.png") 0 0 no-repeat;*/
 	width: 38px;
 	height: 14px;
 	vertical-align: middle;
@@ -5633,7 +5633,7 @@ body {
 }
 
 .icon_service_label {
-	background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/layout_head_z26f6ea.png") 0 -24px no-repeat;
+	/*background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/layout_head_z26f6ea.png") 0 -24px no-repeat;*/
 	width: 38px;
 	height: 14px;
 	vertical-align: middle;
@@ -5652,15 +5652,15 @@ body {
 }
 
 .icon_verify_label.fail {
-	background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/layout_head_z26f6ea.png") 0 -48px no-repeat
+	/*background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/layout_head_z26f6ea.png") 0 -48px no-repeat*/
 }
 
 .icon_verify_label.success {
-	background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/layout_head_z26f6ea.png") 0 -72px no-repeat
+	/*background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/layout_head_z26f6ea.png") 0 -72px no-repeat*/
 }
 
 .icon_inbox {
-	background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/layout_head_z26f6ea.png") 0 -96px no-repeat;
+	/*background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/layout_head_z26f6ea.png") 0 -96px no-repeat;*/
 	width: 20px;
 	height: 15px;
 	vertical-align: middle;
@@ -6030,11 +6030,11 @@ body {
 	height: 40px;
 	overflow: hidden;
 	text-decoration: none;
-	*background: transparent url(/mpres/htmledition/images/bg/bg_logo2491a6.png) 0 0 no-repeat;
+	/**background: transparent url(/mpres/htmledition/images/bg/bg_logo2491a6.png) 0 0 no-repeat;*/
 	*line-height: 120px
 }
 
 .logo a:before {
 	display: inline-block;
-	content: url(/mpres/htmledition/images/bg/bg_logo2491a6.png)
+	/*content: url(/mpres/htmledition/images/bg/bg_logo2491a6.png)*/
 }
