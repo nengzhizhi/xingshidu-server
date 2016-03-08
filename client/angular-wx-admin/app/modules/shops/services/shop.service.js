@@ -29,24 +29,31 @@
 				})				
 			}
 
+
+			//FIXME
+			//当findOne查询不到数据时，angular会认为这是一个错误
 			this.getShopInteraction = function (id) {
 				return Interaction.findOne({
 					filter: {
-						where: { status: 'closed' }
+						where: { shopId: id, status: 'present' }
 					}
 				}).$promise;
 			}
 
+			this.interactionParticipants = function ($promise) {
+				return Interaction.serviceUsers({id: id}).$pormise;
+			}
+
 			this.closeInteraction = function (id, successCb, cancelCb) {
-				// Interaction.updateAll({
-				// 	where: { id: id }
-				// }, {
-				// 	status: 'closed'
-				// }).$promise.then(function () {
-				// 	CoreService.alertSuccess('停止成功！', '', successCb);
-				// }, function (err) {
-				// 	CoreService.alertError('停止不了！', err.statusText, cancelCb);
-				// })
+				Interaction.updateAll({
+					where: { id: id }
+				}, {
+					status: 'closed'
+				}).$promise.then(function () {
+					CoreService.alertSuccess('停止成功！', '', successCb);
+				}, function (err) {
+					CoreService.alertError('停止不了！', err.statusText, cancelCb);
+				})
 			}
 
 			this.getFormFields = function () {

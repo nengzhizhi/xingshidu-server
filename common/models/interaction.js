@@ -69,6 +69,7 @@ module.exports = function (Interaction) {
             status: 'closed',
             closed: new Date()
           }, next);
+          
           Interaction.app.interactionService.closeInteraction(instance.id);
         }
       }//TODO 关闭socketIO
