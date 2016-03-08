@@ -78,9 +78,6 @@ module.exports = function (app) {
     	var interaction = self.interactions && self.interactions[socket.interactionId];
     	if (!interaction)
     		return;
-
-    	//console.log(socket.interactionId, interaction);
-    	//console.log(interaction[socket.id].userId, self.creaters[socket.interactionId]);
       
       if (!!interaction && !!interaction[socket.id]) {
 				if (interaction[socket.id].userId == self.creaters[socket.interactionId]) {

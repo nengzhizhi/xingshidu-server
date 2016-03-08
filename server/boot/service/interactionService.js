@@ -21,6 +21,7 @@ module.exports = function (app) {
 
 	this.getUsers = function (id) {
 		var self = this;
+		console.log('getUsers', self.interactions);
 		return self.interactions[id] || [];
 	}
 

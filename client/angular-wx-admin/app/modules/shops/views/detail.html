@@ -9,14 +9,18 @@
 	</ul>
 </div>
 
-<div class="highlight_box">
+<div class="highlight_box" style="height:120px;">
 	<div class="opr">
 		<a class="btn btn_warn" ng-if="ctrl.living" ng-click="ctrl.close(ctrl.interaction.id)">关闭互动</a>
+
+		<div style="padding: 5px;text-align: center;" ng-if="!ctrl.living">
+			<qrcode version="6" error-correction-level="M" size="96" data="{{ctrl.startUrl}}"></qrcode>
+			<br>扫码开启直播
+		</div>
 	</div>
 	<h4 class="title">直播状态</h4>
 	<p class="desc" ng-if="ctrl.living">正在直播中</p>
 	<p class="desc" ng-if="!ctrl.living">空闲中</p>
-	<qrcode data="string"></qrcode>
 </div>
 
 <div class="frm_control_group gray_desc_item" ng-if="ctrl.living">
@@ -24,17 +28,32 @@
 	<div class="frm_controls frm_vertical_pt">{{ctrl.interaction.id}}</div>
 </div>
 
-
+<div class="title_tab">
+	<ul class="tab_navs title_tab">
+    <li class="tab_nav first js_top selected">
+    	<a href="#">参与互动的用户</a>
+    </li>
+	</ul>
+</div>
 <div class="inner_container_box">
 	<div class="inner_main">
 		<table class="table">
 			<thead class="thead">
-				<tr ng-repeat="participant in participants">
-					<td class="table_cell">
-						{{participant.avatar}}
-					</td>
+				<tr ng-repeat="participant in ctrl.participants">
+					<td class="table_cell"></td>
+					<td class="table_cell">用户头像</td>
+					<td class="table_cell">用户名</td>				
 				</tr>
 			</thead>
+			<tbody class="tbody">
+				<tr ng-repeat="participant in ctrl.participants">
+					<td class="table_cell">{{participant.userId}}</td>
+					<td class="table_cell">
+						<img ng-src="{{participant.avatar}}" height="32" width="32">
+					</td>
+					<td>{{participant.nickname}}</td>
+				</tr>
+			</tbody>			
 		</table>
 	</div>
 </div>

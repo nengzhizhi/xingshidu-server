@@ -37,22 +37,34 @@
 						<a ui-sref="app.shops.list">店铺列表</a>
 					</dd>
 					<dd class="menu_item ">
-						<a ui-sref="app.shops.list">互动列表</a>
+						<a ui-sref="app.shops.interactions">互动列表</a>
 					</dd>		
 				</dl>
-				<dl class="menu ">
+<!-- 				<dl class="menu ">
 				<dt class="menu_title clickable">
 				  <a href="#">
 				  	<i class="icon_menu" style="background:url(https://res.wx.qq.com/mpres/htmledition/images/icon/menu/icon_menu_wxpay_v2.png) no-repeat;"></i>支付管理
 				  </a>
-				</dt>
-				<dt class="menu_title clickable">
-				  <a href="#">
-				  	<i class="icon_menu" style="background:url(https://res.wx.qq.com/mpres/htmledition/images/icon/menu/icon_menu_setup.png
-        ) no-repeat;"></i>设置
-				  </a>
-				</dt> 				
+				</dt> -->
+				<dl class="menu menu_no_extra">
+					<dt class="menu_title">
+					  <i class="icon_menu" style="background:url(https://res.wx.qq.com/mpres/htmledition/images/icon/menu/icon_menu_setup.png
+	        ) no-repeat;"></i>设置
+					</dt>
+					<dd class="menu_item ">
+						<a ui-sref="app.setting.list">设置列表</a>
+					</dd>								
 				</dl>
+
+				<dl class="menu menu_no_extra">
+					<dt class="menu_title">
+					  <i class="icon_menu" style="background:url(https://res.wx.qq.com/mpres/htmledition/images/icon/menu/icon_menu_setup.png
+	        ) no-repeat;"></i>用户管理
+					</dt>
+					<dd class="menu_item ">
+						<a ui-sref="app.users.list">用户列表</a>
+					</dd>								
+				</dl>				
 			</div>
 		</div>
 		<div class="col_main">

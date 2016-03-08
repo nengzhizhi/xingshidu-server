@@ -26,9 +26,8 @@
 					}, function (err) {
 						CoreService.alertError('删除失败！', err, cancelCb);
 					});
-				})				
+				})
 			}
-
 
 			//FIXME
 			//当findOne查询不到数据时，angular会认为这是一个错误
@@ -40,8 +39,8 @@
 				}).$promise;
 			}
 
-			this.interactionParticipants = function ($promise) {
-				return Interaction.serviceUsers({id: id}).$pormise;
+			this.interactionParticipants = function (id) {
+				return Interaction.serviceUsers({id: id}).$promise;
 			}
 
 			this.closeInteraction = function (id, successCb, cancelCb) {

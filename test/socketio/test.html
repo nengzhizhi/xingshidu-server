@@ -3,7 +3,7 @@
 <script type="text/javascript" src="socket.io-1.4.5.js"></script>
 <script type="text/javascript">
 
-var interactionId = '56d57ef5a9cab1ec7c4d4348';
+var interactionId = '56de73a3f06d31cc46a67a6b';
 var nickname = "打地鼠";
 var avatar = "http://xxxx.png";
 var userId = '56d533539ae621606536bb68';
@@ -17,7 +17,7 @@ function sendMessage(){
   })
 }
 
-var socket = io('http://112.124.117.146:3003');
+var socket = io('http://112.124.117.146:4003');
 
 socket.emit('join interaction', {
   interactionId: interactionId,

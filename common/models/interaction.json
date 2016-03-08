@@ -86,7 +86,14 @@
       "principalType": "ROLE",
       "principalId": "$everyone",
       "permission": "ALLOW"
-    }                
+    },
+    {
+      "accessType": "EXECUTE",
+      "property": "serviceUsers",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW"
+    }                    
   ],
   "methods": {}
 }

@@ -15,5 +15,7 @@
 				template: '<input type="text" class="frm_input frm_msg_content" ng-model="model[options.key]">',
 				wrapper: ['label']
 			})
+
+			$rootScope.domainUrl = "http://112.124.117.146:4001/";
 		})
 })();

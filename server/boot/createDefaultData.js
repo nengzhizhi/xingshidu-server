@@ -4,15 +4,6 @@ module.exports = function (app) {
 
   var interactionModel = app.models.Interaction;
 
-  interactionModel.findOne({
-    filter: {
-      where: {
-        status: 'closed'
-      }
-    }
-  }, function (err, data) {
-    console.log(err, data);
-  })
 
   // async.waterfall([
   //   // function createShop(next){

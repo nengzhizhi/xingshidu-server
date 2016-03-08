@@ -9,6 +9,14 @@
 					url: '/shops',
 					templateUrl: 'modules/shops/views/main.html'
 				})
+				.state('app.shops.interactions', {
+					url: '/interactions',
+					templateUrl: 'modules/shops/views/interactions.html',
+					controllerAs: 'ctrl',
+					controller: function () {
+						
+					}
+				})
 				.state('app.shops.list', {
 					url: '/list',
 					templateUrl: 'modules/shops/views/list.html',
@@ -72,22 +80,34 @@
 					url: '/detail/:id',
 					templateUrl: 'modules/shops/views/detail.html',
 					controllerAs: 'ctrl',
-					controller: function ($stateParams, ShopService) {
+					controller: function ($state, $stateParams, ShopService, startUrl) {
 						var self = this;
+						self.startUrl = startUrl;
+
 						ShopService.getShopInteraction($stateParams.id)
 							.then(function (interaction) {
 								self.interaction = interaction;
 								self.living = !!interaction;
 
-								self.participants = ShopService.interactionParticipants(interaction.id);
+								// self.participants = ShopService.interactionParticipants(interaction.id);
+								// console.log(self.participants);
+								ShopService.interactionParticipants(interaction.id).then(function (data) {
+									self.participants = data.users;
+									console.log(self.participants);
+								})
 							}, function (err) {
 								self.interaction = {}
 							});
 
-						this.close = function ($state, id) {
+						this.close = function (id) {
 							ShopService.closeInteraction(id, function(){
 								$state.go($state.current, {}, {reload: true});
 							})
+						}
+					},
+					resolve: {
+						startUrl: function($rootScope, $stateParams){
+							return $rootScope.domainUrl + 'api/interactions/start?shopId=' + $stateParams.id;
 						}
 					}
 				})

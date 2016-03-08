@@ -87,7 +87,9 @@ module.exports = function (Interaction) {
   })
 //---------------------------------------------------------------------------------
   Interaction.serviceUsers = function (id, cb) {
-    return cb(null, Interaction.app.interactionService.getUsers(id));
+    var users = Interaction.app.interactionService.getUsers(id);
+    console.log('users: ', users);
+    return cb(null, users);
   }
 
   Interaction.remoteMethod('serviceUsers', {

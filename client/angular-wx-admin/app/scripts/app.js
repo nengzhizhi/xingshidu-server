@@ -12,9 +12,11 @@
       'formly',
       'ui.router',
       'lbServices',
+      'monospaced.qrcode',
       'com.module.core',
       'com.module.users',
       'com.module.example',
-      'com.module.shops'
+      'com.module.shops',
+      'com.module.setting'
     ])
 })();
