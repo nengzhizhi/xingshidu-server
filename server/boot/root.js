@@ -4,8 +4,8 @@ module.exports = function(server) {
   router.get('/', server.loopback.status());
   server.use(router);
 
-  router.post('/weixin/callback', function (req, res, next) {
-  	console.log('auth account');
-  	next();
-  })
+  // router.post('/weixin/callback', function (req, res, next) {
+  // 	console.log('auth account');
+  // 	next();
+  // })
 };

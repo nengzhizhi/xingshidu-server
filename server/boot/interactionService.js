@@ -38,8 +38,6 @@ module.exports = function (app) {
 	var self = this;
 	this.io.on('connection', function (socket) {
 		socket.on('join interaction', function (data) {
-			console.log('join interaction:', data);
-			
 			//FIXME 检查输入参数
 			if (!data.interactionId)
 				return;
@@ -78,7 +76,7 @@ module.exports = function (app) {
     	var interaction = self.interactions && self.interactions[socket.interactionId];
     	if (!interaction)
     		return;
-      
+
       if (!!interaction && !!interaction[socket.id]) {
 				if (interaction[socket.id].userId == self.creaters[socket.interactionId]) {
 					interactionModel.close(socket.interactionId, function (err, result) {});
@@ -87,7 +85,7 @@ module.exports = function (app) {
 
 				delete self.interactions[socket.interactionId][socket.id];
 
-				self.io.to(data.interactionId).emit('left', {
+				self.io.to(socket.interactionId).emit('left', {
 					userNumber: _.size(interaction),
 					revealedUsers: self.getRevealedUsers(interaction, 10)
 				})

@@ -16,6 +16,6 @@
 				wrapper: ['label']
 			})
 
-			$rootScope.domainUrl = "http://112.124.117.146:4001/";
+			$rootScope.domainUrl = "http://www.vgame.tv/";
 		})
 })();

@@ -9,13 +9,18 @@ var app = module.exports = loopback();
 app.use(loopback.static(path.resolve(__dirname, '../client/angular-wx-admin/app')));
 //path for bower_components
 app.use(loopback.static(path.resolve(__dirname, '../client/angular-wx-admin/')));
-
+//path for bower_components
+app.use(loopback.static(path.resolve(__dirname, '../client/share-page')));
 // to support JSON-encoded bodies
 app.use(bodyParser.json());
 // to support URL-encoded bodies
 app.use(bodyParser.urlencoded({
   extended: true
 }));
+
+app.set('views', path.join(__dirname, '../client/share-page'));
+app.set('view engine', 'html');
+app.engine('html', require('ejs').renderFile);
 
 app.start = function() {
   // start the web server

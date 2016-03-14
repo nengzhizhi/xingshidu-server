@@ -13,15 +13,16 @@
     "provider": "weixin",
     "module": "passport-weixin",
     "strategy": "Strategy",
-    "clientID": "wx0f7ccd1a13be80b6",
-    "clientSecret": "24e548386c72e1f8870dd34ffd2bd1fd",
-    "callbackURL": "http://ar.jingfree.com/auth/weixin/callback",
+    "clientID": "wxd8c20e196a6cc470",
+    "clientSecret": "da377bf8bec17803937754df250fa8f2",
+    "callbackURL": "http://www.vgame.tv/auth/weixin_client/callback",
     "requireState": false,
     "authorizationURL": "https://open.weixin.qq.com/connect/oauth2/authorize",
     "successRedirect": "/auth/account",
     "failureRedirect": "/login",
     "authPath": "/auth/weixin_client",    
-    "scope": "snsapi_userinfo"
+    "scope": "snsapi_userinfo",
+    "profile": true
   },
   "open-id": {
     "provider": "weixin",

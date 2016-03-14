@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html style="min-height: 414px;">
+  <head>
+    <title>星视度</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui" name="viewport">
+    <meta name="description" content="星视度">
+
+    <link href="/css/video-js.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/css/index.css">
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+
+    <!--[if lt IE 8]>
+      <script type="text/javascript" src="/js/videojs-ie8.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+    <div class="header clearfix">
+      <img src="/images/img-icon.png" class="header-icon">
+      <span class="title">EXE星视度-看与被看的激情</span>
+      <a class="download">下载</a>
+    </div>
+
+    <div class="broadcast-wrapper">
+      <video id="broadcast-video" class="video-js vjs-default-skin" preload="auto" width="100%" controls data-setup='{"autoplay": true}' webkit-playsinline>
+        <source id="broadcast-source" class="video-source" src="http://vlive3.hls.cdn.ucloud.com.cn/ucloud/test/playlist.m3u8" type="video/mp4" />
+      </video>
+      <div class="broadcast-end">直播已结束</div>
+      <div class="connection-interrunption">连接中断，正在尝试重新连接</div>
+      <div class="user-info clearfix">
+        <img src="/images/img-icon.png" class="user-icon">
+        <div class="show-info">
+          <div class="user-name"></div>
+          <div class="current-time">
+            <span class="dot"></span>
+            <span class="play-time"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="online-info clearfix">
+      <div class="people-common">
+        <img src="/images/img-people-number.png" class="show-icon">
+        <div class="show-text"><span class="current-number"></span>人在看</div>
+      </div>
+
+      <div class="people-common" style="float:right;">
+        <img src="/images/img-location.png" class="show-icon">
+        <div class="show-text shop-address"></div>
+      </div>
+      
+      <div class="head-images">
+      </div>
+    </div>
+
+    <div class="comment-stage abp" style="height:600px;">
+      <div class="messages container">  
+      </div>
+    </div>
+
+    <div class="comment-wrapper clearfix">
+      <input class="comment-content" placeholder="说点什么吧..." maxlength="15">
+      <a class="btn-comment" href="javascript:sendMessage();"></a>
+    </div>
+
+    <script type="text/javascript" src="/js/socket.io.js"></script>
+    <script type="text/javascript" src="/js/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="/js/video.js"></script>
+    <script type="text/javascript" src="/js/CommentCoreLibrary.js"></script>
+    <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+
+    <script type="text/javascript">
+      //iOS系统的移动设备开发，需要在按钮元素或body/html上绑定一个touchstart事件才能激活:active状态（设置html的css样式-webkit-tap-highlight-color去掉点击出现的色块）
+      document.body.addEventListener('touchstart', function () {});
+      //客户端与服务器端通信
+      var socket = io('http://112.124.117.146:3003');
+      // 定时更新时间
+      var timeInterval = null;
+      // 在窗体载入完毕后再绑定
+      var url = window.location.search;
+      //var interactionId = url.substr(url.indexOf('id')+3) || '56d575da2c934d6b78be29aa',
+      var interactionId = '<%-interactionId %>',
+          userId = null,
+          CM = null;
+      console.log(interactionId);
+      //获取互动详情信息
+      $(document).ready(function(){
+        $.ajax({
+          type: 'post',
+          url: 'http://www.vgame.tv/api/Interactions/detail',
+          data: {id: interactionId},
+          success: function(data){
+            $('.user-name').text('<%-nickname %>');
+            $('.user-icon').attr('src', '<%-avatar %>');
+            var nowTime = new Date().getTime();
+            var playTime = new Date(nowTime - data.created);
+
+            $('.play-time').text(formateDate(playTime, 'hh:mm:ss'));
+            if (timeInterval === null){
+              timeInterval = setInterval(function(){
+                playTime = new Date(playTime.getTime() + 1000);
+                $('.play-time').text(formateDate(playTime, 'hh:mm:ss'));
+              }, 1000);
+            }
+
+            $('.shop-address').text(data.shop.name);
+            $('.user-id').val(data.userId);
+            if($('#broadcast-source').attr('src') != data.shop.hls_url){
+              $('#broadcast-source').attr('src', data.shop.hls_url);
+              $('#broadcast-video_html5_api').attr('src', data.shop.hls_url);
+            }
+
+            //向服务器发送消息
+            socket.emit('join interaction', {
+              "interactionId": interactionId,
+              "nickname": $('.user-name').text(),
+              "avatar": $('.user-icon').attr('src'),
+              "userId": userId
+            });
+          },
+          error: function(data){
+            console.log(data);
+          }
+        });
+        
+        initData();
+      });
+      
+      function initData(){
+        CM = new CommentManager($('.messages'));
+        CM.init();
+        // 先启用弹幕播放（之后可以停止）
+        CM.start();
+
+        //设置弹幕输入框宽度
+        var width = $(window).width()>640 ? 640 : $(window).width();
+        $('.comment-content').outerWidth(width - $('.btn-comment').width()-10);
+      }
+
+      //下载
+      $('#download').click(function(){
+        // window.location.href = "https://www.pgyer.com/exelook";
+      });
+
+      //发送弹幕
+      function sendMessage(){    
+        if($('.comment-content').val().length>0){
+          socket.emit('send message', {
+            "interactionId": interactionId,
+            "nickname": $('.user-name').text(),
+            "avatar": $('.user-icon').attr('src'),
+            "message": $('.comment-content').val()
+          });
+          $('.comment-content').val('');
+          $('.comment-content').focus();
+        }
+      }
+
+      //从服务器接收数据
+      socket.on('joined', function (data) {
+        getRevealedUsers(data);
+      });
+
+      socket.on('left', function (data) {
+        getRevealedUsers(data);
+      });
+
+      socket.on('new message', function (data) {
+        var danmu = {
+            "mode": 1,
+            "text": data.message,
+            "stime": 0,
+            "size": 14,
+            "color": 0xff00ff,
+            "dur": 4000,
+            'avatar': data.avatar,
+            'nickname': data.nickname,
+            'avatarClassName': 'message-icon',
+            'nicknameClassName': 'name',
+            'divClassName': 'message',
+            'textClassName': 'text'
+          };
+        //发送弹幕
+        CM.send(danmu);
+      });
+
+      socket.on('close interaction', function (data) {
+        if(data.id){
+          $('.broadcast-end').show();
+          $('.comment-wrapper').hide();
+          $('.user-info').hide();
+          $('.comment-stage').height($(window).height()-$('.header').outerHeight()-$('.broadcast-wrapper').outerHeight()-$('.online-info').outerHeight());
+          $('.broadcast-end').css('line-height', $('.broadcast-wrapper').height()+'px');
+          if (timeInterval !== null) {
+            clearInterval(timeInterval);
+            timeInterval = null;
+          }
+        }
+      });
+      //显示在线用户的头像
+      function getRevealedUsers(data){
+        var usersLength = null;
+        $('.current-number').text(data.userNumber);
+        if($(window).width() >= 320 && $(window).width() < 375){
+          usersLength = data.revealedUsers.length>7 ? 7 : data.revealedUsers.length;
+        }else if($(window).width() >= 375){
+          usersLength = data.revealedUsers.length>9 ? 9 : data.revealedUsers.length;
+        }
+        var userAvatarHtml = '';
+        for(var i=0; i<usersLength; i++){
+          userAvatarHtml += '<img src="'+data.revealedUsers[i]['avatar']+'" class="head-image">';
+        }
+        $('.head-images').html(userAvatarHtml);
+        $('.comment-stage').height($(window).height()-$('.header').outerHeight()-$('.broadcast-wrapper').outerHeight()-$('.online-info').outerHeight()-$('.comment-wrapper').height());
+      }
+
+      //格式化日期
+      function formateDate(time, fmt){
+        var o = {
+            "M+": time.getMonth() + 1, //月份 
+            "d+": time.getDate(), //日 
+            "h+": time.getHours(), //小时 
+            "m+": time.getMinutes(), //分 
+            "s+": time.getSeconds(), //秒 
+            "q+": Math.floor((time.getMonth() + 3) / 3), //季度 
+            "S": time.getMilliseconds() //毫秒 
+        };
+        if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (time.getFullYear() + "").substr(4 - RegExp.$1.length));
+        for (var k in o)
+        if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+        return fmt;
+      }
+      
+      //百度统计
+      var _hmt = _hmt || [];
+      (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?a684d48054a014931f691d16169fc592";
+        var s = document.getElementsByTagName("script")[0]; 
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+  </body>
+</html>

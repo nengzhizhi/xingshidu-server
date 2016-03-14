@@ -3,8 +3,8 @@
 <script type="text/javascript" src="socket.io-1.4.5.js"></script>
 <script type="text/javascript">
 
-var interactionId = '56de73a3f06d31cc46a67a6b';
-var nickname = "打地鼠";
+var interactionId = '56e11a54cc7cbad33d0d15f9';
+var nickname = "打地鼠11";
 var avatar = "http://xxxx.png";
 var userId = '56d533539ae621606536bb68';
 
@@ -17,7 +17,7 @@ function sendMessage(){
   })
 }
 
-var socket = io('http://112.124.117.146:4003');
+var socket = io('http://112.124.117.146:3003');
 
 socket.emit('join interaction', {
   interactionId: interactionId,
@@ -32,6 +32,10 @@ socket.on('new message', function (data) {
 
 socket.on('joined', function (data) {
 	console.log('joined', data);
+})
+
+socket.on('left', function (data) {
+  console.log('left', data);
 })
 </script>
 

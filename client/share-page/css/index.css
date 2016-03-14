@@ -1,0 +1,281 @@
+html {
+  max-width: 640px;
+  min-width: 320px;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+html,
+body {
+  margin: 0 auto;
+  padding: 0;
+  position: relative;
+  height: 100%;
+}
+* {
+  box-sizing: border-box;
+}
+.header {
+  padding: 8px 15px;
+  background: #333;
+  color: #fff;
+  height: 52px;
+  line-height: 36px;
+  font-size: 17px;
+}
+.header .header-icon {
+  width: 36px;
+  margin: 0;
+  padding: 0;
+}
+.header .title {
+  display: inline-block;
+  vertical-align: top;
+}
+.header .download {
+  float: right;
+  font-weight: bold;
+  background-image: url('../images/btn-download-normal.png');
+  background-size: 100% auto;
+  width: 66px;
+  text-align: center;
+  display: inline-block;
+}
+.header .download:active {
+  background-image: url('../images/btn-download-pressed.png');
+}
+.save-data {
+  display: none;
+}
+.broadcast-wrapper {
+  width: 100%;
+  position: relative;
+}
+.broadcast-wrapper .video-js {
+  width: 100%;
+  height: auto;
+  line-height: 0;
+  background-color: #dedede;
+}
+.broadcast-wrapper .video-js .vjs-tech {
+  position: relative;
+}
+.broadcast-wrapper .broadcast-end,
+.broadcast-wrapper .connection-interrunption {
+  width: 100%;
+  height: 100%;
+  background-color: #000;
+  text-align: center;
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.broadcast-wrapper .broadcast-end {
+  color: #b3b3b3;
+}
+.broadcast-wrapper .connection-interrunption {
+  opacity: 0.5;
+  color: #fff;
+  font-size: 15px;
+}
+.broadcast-wrapper .user-info {
+  position: absolute;
+  z-index: 1000;
+  top: 32px;
+  left: 15px;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 20px;
+  height: 44px;
+  padding: 2px;
+}
+.broadcast-wrapper .user-info .user-icon {
+  width: 40px;
+  border-radius: 50%;
+}
+.broadcast-wrapper .user-info .show-info {
+  display: inline-block;
+  margin: 6px 20px 3px 0px;
+  vertical-align: top;
+}
+.broadcast-wrapper .user-info .show-info .user-name {
+  font-size: 15px;
+  color: #fff;
+}
+.broadcast-wrapper .user-info .show-info .current-time {
+  font-size: 11px;
+  color: #2fbdff;
+}
+.broadcast-wrapper .user-info .show-info .current-time .dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  margin-right: 4px;
+  background-color: #2fbdff;
+  display: inline-block;
+  vertical-align: middle;
+}
+.online-info {
+  padding: 12px 12px 12px 11px;
+  background-color: #333;
+}
+.online-info .people-common {
+  display: inline-block;
+  margin-bottom: 10px;
+}
+.online-info .people-common .show-icon {
+  width: 15px;
+  margin-left: 11px;
+  vertical-align: text-bottom;
+}
+.online-info .people-common .show-text {
+  display: inline-block;
+  color: #b3b3b3;
+  font-size: 13px;
+}
+.online-info .head-images {
+  clear: both;
+  width: 100%;
+}
+.online-info .head-images .head-image {
+  width: 32px;
+  border-radius: 50%;
+  margin-right: 8px;
+}
+.online-info .head-images .head-image:last-child {
+  margin-right: 0;
+}
+.comment-stage {
+  width: 100%;
+  background-color: #333;
+}
+.comment-stage .cmt {
+  height: 36px;
+  padding: 2px;
+  border-radius: 20px;
+  background-color: rgba(0, 0, 0, 0.1);
+  display: inline-block;
+  margin-bottom: 20px;
+}
+.comment-stage .cmt .message-icon {
+  width: 32px;
+  border-radius: 50%;
+  vertical-align: top;
+}
+.comment-stage .cmt .message {
+  display: inline-block;
+  margin-right: 12px;
+  margin-left: 5px;
+}
+.comment-stage .cmt .message .name {
+  font-size: 11px;
+  color: #b3b3b3;
+  margin-bottom: 2px;
+  font-weight: bold;
+}
+.comment-stage .cmt .message .text {
+  font-size: 15px;
+  color: #fff;
+}
+.comment-wrapper {
+  width: 100%;
+  height: 44px;
+  background: #292929;
+}
+.comment-wrapper .comment-content {
+  border: none;
+  width: 270px;
+  height: 44px;
+  background-color: #292929;
+  font-size: 15px;
+  color: #b3b3b3;
+  padding-left: 15px;
+  display: inline-block;
+}
+.comment-wrapper .comment-content:focus {
+  color: #fff;
+}
+.comment-wrapper .btn-comment {
+  width: 44px;
+  height: 44px;
+  float: right;
+  background-image: url('../images/btn-send-normal.png');
+  background-size: 100% auto;
+}
+.comment-wrapper .btn-comment:active {
+  background-image: url('../images/btn-send-pressed.png');
+}
+@media (max-width: 320px) {
+  html {
+    width: 320px;
+  }
+  .header {
+    font-size: 14px !important;
+  }
+}
+.video-js .vjs-control-bar {
+  display: flex !important;
+  background-color: transparent;
+  height: 4.7em;
+  padding: 0 12px 12px 12px;
+}
+.video-js .vjs-control-bar .vjs-play-control {
+  width: 44px;
+  background-size: 100% auto;
+  background-image: url('../images/btn-play.png');
+  background-repeat: no-repeat;
+  position: absolute;
+  bottom: 8px;
+  z-index: 100;
+}
+.video-js .vjs-control-bar .vjs-play-control:before {
+  content: '';
+}
+.video-js .vjs-control-bar .vjs-play-control.vjs-playing {
+  background-image: url('../images/btn-pause.png');
+}
+.video-js .vjs-control-bar .vjs-play-control.vjs-playing:active {
+  background-image: url('../images/btn-pause-pressed.png');
+}
+.video-js .vjs-control-bar .vjs-play-control.vjs-paused {
+  background-image: url('../images/btn-play.png');
+}
+.video-js .vjs-control-bar .vjs-play-control.vjs-paused:active {
+  background-image: url('../images/btn-play-pressed.png');
+}
+.video-js .vjs-control-bar .vjs-volume-menu-button,
+.video-js .vjs-control-bar .vjs-progress-control,
+.video-js .vjs-control-bar .vjs-remaining-time-display {
+  display: none;
+}
+.video-js .vjs-control-bar .vjs-fullscreen-control {
+  width: 44px;
+  position: absolute;
+  right: 12px;
+  z-index: 100;
+  bottom: 8px;
+}
+.video-js .vjs-control-bar .vjs-fullscreen-control:before {
+  content: '';
+}
+.video-js .vjs-big-play-button {
+  display: none;
+}
+.vjs-icon-fullscreen-enter:before,
+.video-js .vjs-fullscreen-control:before {
+  background-image: url('../images/btn-fullscreen.png');
+  background-size: 100% auto;
+  background-repeat: no-repeat;
+}
+.vjs-icon-fullscreen-enter:before:active,
+.video-js .vjs-fullscreen-control:before:active {
+  background-image: url('../images/btn-fullscreen-pressed.png');
+}
+.vjs-icon-fullscreen-exit:before,
+.video-js.vjs-fullscreen .vjs-fullscreen-control:before {
+  background-image: url('../images/btn-halfsize.png');
+  background-size: 100% auto;
+  background-repeat: no-repeat;
+}
+.vjs-icon-fullscreen-exit:before:active,
+.video-js.vjs-fullscreen .vjs-fullscreen-control:before:active {
+  background-image: url('../images/btn-halfsize-pressed.png');
+}
