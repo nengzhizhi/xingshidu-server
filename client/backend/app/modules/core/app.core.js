@@ -1,4 +1,4 @@
 (function(){
-	'use strict';
+	'user strict';
 	angular.module('com.module.core', []);
 })();

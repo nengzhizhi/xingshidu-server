@@ -4,96 +4,111 @@ var config = require('../config.json');
 
 //instance
 module.exports = function (app) {
-	this.interactions = [];
-	this.creaters = [];
-	this.io = new socketIO();
-	var interactionModel = app.models.Interaction;
+//-----------------------------------------------------------
+	var InteractionService = function (cfg) {
+		this.init = function () {
+			var self = this;
 
-	this.getRevealedUsers = function (users, number) {
-		return _.takeRight( _.toArray(users), number);
-	}
+			self.io = new socketIO();
+			self.interactions = {};
 
-	this.closeInteraction = function (id) {
-		var self = this;
-		if (!!self.interactions[id]) {
-			self.io.to(id).emit('close interaction', { id: id });
-			delete self.interactions[id];
-			delete self.creaters[id];
-		}
-	}
-
-	this.setInteractionCreater = function (id, userId) {
-		var self = this;
-		if (!self.interactions[id]) {
-			self.interactions[id] = {};
-		}
-		self.creaters[id] = userId;
-	}
-
-	this.getUsers = function (id) {
-		var self = this;
-		return _.values(self.interactions[id]) || [];
-	}
-
-	var self = this;
-	this.io.on('connection', function (socket) {
-		socket.on('join interaction', function (data) {
-			//FIXME 检查输入参数
-			if (!data.interactionId)
-				return;
-
-			if (!self.interactions[data.interactionId]) {
-				self.interactions[data.interactionId] = {};
-			}
-
-			socket.join(data.interactionId, function (err) {
-				socket.interactionId = data.interactionId;
-
-				self.interactions[data.interactionId][socket.id] = {
-					nickname: data.nickname,
-					avatar: data.avatar,
-					userId: data.userId
-				}
-
-				if (!err) {
-					self.io.to(data.interactionId).emit('joined', {
-						userNumber: _.size(self.interactions[data.interactionId]),
-						revealedUsers: self.getRevealedUsers(self.interactions[data.interactionId], 10)
+			self.io.on('connection', function (socket) {
+				socket.on('join interaction', function (data) {
+					self.joinInteraction(data.interactionId, socket, data, function (err) {
+						if (!err) {
+							self.notifyInteraction(data.interactionId, 'joined', {
+								userNumber: _.size(self._getUsers(data.interactionId)),
+								revealedUsers: self._getRevealedUsers(data.interactionId, 10)
+							});
+						}
 					})
-				}
-			})
-		})
-
-		socket.on('send message', function (data) {
-      self.io.to(socket.interactionId).emit('new message', {
-        nickname: data.nickname,
-        avatar: data.avatar,
-        message: data.message
-      });			
-		})
-
-    socket.on('disconnect', function(data) {
-    	var interaction = self.interactions && self.interactions[socket.interactionId];
-    	if (!interaction)
-    		return;
-
-      if (!!interaction && !!interaction[socket.id]) {
-				if (interaction[socket.id].userId == self.creaters[socket.interactionId]) {
-					interactionModel.close(socket.interactionId, function (err, result) {});
-					return;
-				}
-
-				delete self.interactions[socket.interactionId][socket.id];
-
-				self.io.to(socket.interactionId).emit('left', {
-					userNumber: _.size(interaction),
-					revealedUsers: self.getRevealedUsers(interaction, 10)
 				})
-      }
-    })		
-	})
 
-	this.io.listen(config.interactionServicePort);
-	console.log('start interaction service on: ', config.interactionServicePort);
-	app.interactionService = this;
+				socket.on('send message', function (data) {
+					self.notifyInteraction(data.interactionId, 'new message', data);
+				})
+
+				socket.on('disconnect', function (data) {
+					var interaction = self.interactions && self.interactions[socket.interactionId];
+
+					self.leftInteraction(socket.interactionId, socket);
+					self.notifyInteraction(socket.interactionId, 'left', {
+						userNumber: _.size(self._getUsers(socket.interactionId)),
+						revealedUsers: self._getRevealedUsers(socket.interactionId, 10)
+					})
+				})
+			})
+
+			self.io.listen(config.interactionServicePort);
+			console.log('start interaction service on: ', config.interactionServicePort);
+		}
+
+		this.notifyInteraction = function(interactionId, eventName, eventData){
+			var self = this;
+			var interaction = self.interactions && self.interactions[interactionId];
+			if (!!interaction) {
+				self.io.to(interactionId).emit(eventName, eventData);
+			}	
+		}
+
+		this.startInteraction = function(interactionId){
+			var self = this;
+			self.closeInteraction(interactionId);
+
+			self.interactions[interactionId] = {};
+		}
+
+		this.joinInteraction = function(interactionId, socket, userInfo, cb){
+			var self = this;
+
+			if (!self.interactions || !self.interactions[interactionId])
+				return cb(new Error('互动不存在'));
+
+			socket.join && socket.join(interactionId, function (err) {
+				socket.interactionId = interactionId;
+				
+				self.interactions[interactionId][socket.id] = {
+					nickname: userInfo.nickname,
+					avatar: userInfo.avatar,
+					userId: userInfo.userId
+				}
+				cb(err);
+			});
+		}
+
+		this.closeInteraction = function(interactionId){
+			var self = this;
+			delete self.interactions[interactionId];
+		}
+
+		this.leftInteraction = function(interactionId, socket){
+			var self = this;
+
+			var interaction = self.interactions && self.interactions[interactionId];
+			if (!!interaction)
+				delete interaction[socket.id];
+		}
+
+		this.listInteractions = function () {
+			var self = this;
+			return self.interactions;
+		}
+
+		this._getRevealedUsers = function (interactionId, number) {
+			var self = this;
+			return _.takeRight( _.toArray(self._getUsers(interactionId)), number);
+		}
+
+		this._getUsers = function(interactionId){
+			var self = this;
+			return self.interactions && self.interactions[interactionId];
+		}
+	}
+
+//-----------------------------------------------------------
+	var interactionModel = app.models.Interaction;
+	var interactionService = new InteractionService();
+	interactionService.init();
+	app.interactionService = interactionService;
+//-----------------------------------------------------------
 }

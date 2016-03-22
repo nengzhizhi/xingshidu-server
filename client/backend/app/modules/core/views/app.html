@@ -1,57 +1,56 @@
-<!-- Main Header -->
-<header class="main-header">
-	<!-- Logo -->
-	<a href="index2.html" class="logo">
-		<!-- mini logo for sidebar mini 50x50 pixels -->
-		<span class="logo-mini">{{title}}</span>
-		<!-- logo for regular state and mobile devices -->
-		<span class="logo-lg">{{title}}</span>
-	</a>
-	<nav class="navbar navbar-static-top" role="navigation">
-		<a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
-			<span class="sr-only">Toggle navigation</span>
-		</a>
+<div class="head">
+	<div class="head_box">
+		<div class="inner wrp">
+			<h1 class="logo">
+				<a href="/" title="">星视度</a></h1>
+			<div class="account">
 
-		<div class="navbar-custom-menu">
-      <ul class="nav navbar-nav">
-				<!-- User Account: style can be found in dropdown.less -->
-        <li class="dropdown user user-menu">
-          <a class="dropdown-toggle" data-toggle="dropdown">
-            <img src="images/user2-160x160.jpg" class="user-image" alt="User Image">
-            <span class="hidden-xs">{{currentUser.username}}</span>
-          </a>
-					<ul class="dropdown-menu">
-            <!-- User image -->
-            <li class="user-header">
-              <img src="images/user2-160x160.jpg" class="img-circle" alt="User Image">
+				<div class="account_meta account_info account_meta_primary">
+					<a href="#" class="nickname">{{currentUser.username}}</a>
+					<span class="type_wrp">
+						<a href="#" class="type icon_subscribe_label">管理员</a>
+						<a href="#" class="type icon_verify_label fail">未认证</a>
+					</span>
+					<a href="#">
+						<img src="../images/getheadimg" class="avatar">
+					</a>
+				</div>
 
-              <p>
-                {{currentUser.username}} - Web Developer
-                <small>Member since Nov. 2012</small>
-              </p>
-            </li>
-            <!-- Menu Body -->
-            <li class="user-body">
-            </li>
-            <!-- Menu Footer-->
-            <li class="user-footer">
-              <div class="pull-left">
-                <a href="#" class="btn btn-default btn-flat">个人中心</a>
-              </div>
-              <div class="pull-right">
-                <a ui-sref="logout" class="btn btn-default btn-flat">退出</a>
-              </div>
-            </li>
-          </ul>
-        </li>
-        <!-- Control Sidebar Toggle Button -->
-        <li>
-          <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
-        </li>
-      </ul>
-    </div>
-	</nav>
-</header>
-<sidebar></sidebar>
+				<div class="account_meta account_logout account_meta_primary">
+					<a ui-sref="logout">退出</a>
+				</div>				
 
-<div ui-view class="content-wrapper"></div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="body">
+	<div class="container_box cell_layout side_l">
+		<div class="col_side">
+			<div class="menu_bar">
+				<dl class="menu_no_extra">
+					<dt class="menu_title">
+      			<i class="icon_menu" style="background:url(https://res.wx.qq.com/mpres/htmledition/images/icon/menu/icon_menu_function.png) no-repeat;"></i>店铺管理
+          </dt>
+					<dd class="menu_item ">
+						<a ui-sref="app.shops.list">店铺列表</a>
+					</dd>	
+				</dl>
+
+				<dl class="menu menu_no_extra">
+					<dt class="menu_title">
+					  <i class="icon_menu" style="background:url(https://res.wx.qq.com/mpres/htmledition/images/icon/menu/icon_menu_setup.png
+	        ) no-repeat;"></i>用户管理
+					</dt>
+					<dd class="menu_item ">
+						<a ui-sref="app.users.list">用户列表</a>
+					</dd>								
+				</dl>				
+			</div>
+		</div>
+		<div class="col_main">
+			<div ui-view></div>
+		</div>
+	</div>
+</div>

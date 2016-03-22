@@ -1,0 +1,36 @@
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="socket.io-1.4.5.js"></script>
+<table class="table">
+	<thead class="thead">
+		<tr>
+			<th class="table_cell">操作</th>
+			<th class="table_cell" align="right">结果</th>
+		</tr> 
+	</thead>
+	<tbody class="tbody">
+		<tr>
+			<td class="table_cell">
+				<a class="btn btn_primary" ng-click="ctrl.connect()">建立连接</a>
+			</td>
+			<td class="table_cell" align="right">
+				<span>{{ctrl.connect_result}}</span>
+			</td>
+		</tr>
+		<tr>
+			<td class="table_cell">
+				<a class="btn btn_primary" ng-click="ctrl.join()">加入互动</a>
+			</td>
+			<td class="table_cell" align="right">
+				<span>{{ctrl.join_result}}</span>
+			</td>
+		</tr>
+		<tr>
+			<td class="table_cell">
+				<a class="btn btn_primary" ng-click="ctrl.send()">发送消息</a>
+			</td>
+			<td class="table_cell" align="right">
+				<span>{{ctrl.message_result}}</span>
+			</td>
+		</tr>
+	</tbody>
+</table>

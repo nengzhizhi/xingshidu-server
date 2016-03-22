@@ -14,42 +14,22 @@
 					url: '/logout',
 					controllerAs: 'ctrl',
 					controller: function (User, LoopBackAuth, $state) {
-						User.logout({"access_token": LoopBackAuth.accessTokenId}, function () {
+						User.logout({ "access_token": LoopBackAuth.accessTokenId }, function () {
 							$state.go('login');
 						})
 					}
 				})
 				.state('app.users', {
 					abstract: true,
-					url: '/user',
+					url: '/users',
 					templateUrl: 'modules/users/views/main.html'
-				})
+				})				
 				.state('app.users.list', {
 					url: '/list',
+					controllerAs: 'ctrl',
 					templateUrl: 'modules/users/views/list.html',
-					controllerAs: 'ctrl',
-					controller: function (users) {
-						this.users = users;
-					},
-					resolve: {
-						users: function (User) {
-							return User.find().$promise;
-						}
+					controller: function (User) {
 					}
-				})
-				.state('app.users.detail', {
-					url: '/detail/:id',
-					templateUrl: 'modules/users/views/detail.html',
-					controllerAs: 'ctrl',
-					controller: function (UserService, user) {
-						this.user = user;
-						this.showIdentities = !!this.user.identities;
-					},
-					resolve: {
-						user: function ($stateParams, UserService) {
-							return UserService.userDetail($stateParams.id);
-						}
-					}
-				})
+				})				
 		})
 })();

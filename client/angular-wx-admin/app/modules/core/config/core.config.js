@@ -16,6 +16,7 @@
 				wrapper: ['label']
 			})
 
-			$rootScope.domainUrl = "http://www.vgame.tv/";
+			$rootScope.domainUrl = "http://xsd.vookan.com/";
+			$rootScope.socketUrl = "http://114.55.53.181:4003/";
 		})
 })();

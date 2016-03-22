@@ -2,20 +2,20 @@
 	'use strict';
 	angular
 		.module('com.module.core')
-		.run(function ($rootScope) {
-			//设置标题
-			$rootScope.title = "星视度后台";
+		.run(function (formlyConfig, $rootScope) {
+    	formlyConfig.setWrapper([
+				{
+					name: 'label',
+					templateUrl: 'modules/core/views/formly/label.html'
+				}
+    	])
 
-			//左侧导航菜单
-			$rootScope.menu = [];
+    	formlyConfig.setType({
+				name: 'input',
+				template: '<input type="text" class="frm_input frm_msg_content" ng-model="model[options.key]">',
+				wrapper: ['label']
+			})
 
-			$rootScope.addMenu = function (name, uisref, icon, subMenus) {
-				$rootScope.menu.push({
-					name: name,
-					sref: uisref,
-					icon: icon,
-					subMenus: subMenus
-				})
-			}
+			$rootScope.domainUrl = "http://localhost/";
 		})
 })();

@@ -3,14 +3,16 @@
   "base": "PersistedModel",
   "properties": {
     "status": {
-      "type": "string",
-      "required": true
+      "type": "string"
     },
     "created": {
       "type": "number"
     },
     "closed": {
       "type": "number"
+    },
+    "snapshot_url": {
+      "type": "string"
     }
   },
   "validations": [],
@@ -61,20 +63,6 @@
     },
     {
       "accessType": "EXECUTE",
-      "property": "close",
-      "principalType": "ROLE",
-      "principalId": "$owner",
-      "permission": "ALLOW"
-    },
-    {
-      "accessType": "EXECUTE",
-      "property": "start",
-      "principalType": "ROLE",
-      "principalId": "$authenticated",
-      "permission": "ALLOW"
-    },
-    {
-      "accessType": "EXECUTE",
       "property": "detail",
       "principalType": "ROLE",
       "principalId": "$everyone",
@@ -89,7 +77,7 @@
     },
     {
       "accessType": "EXECUTE",
-      "property": "serviceUsers",
+      "property": "sockets",
       "principalType": "ROLE",
       "principalId": "$everyone",
       "permission": "ALLOW"

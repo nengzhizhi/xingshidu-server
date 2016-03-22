@@ -6,6 +6,9 @@
       "type": "string",
       "required": true
     },
+    "token": {
+      "type": "string"
+    },
     "rtmp_url": {
       "type": "string",
       "required": true
@@ -17,6 +20,9 @@
     "flv_url": {
       "type": "string",
       "required": true
+    },
+    "status": {
+      "type": "string"
     }
   },
   "validations": [],

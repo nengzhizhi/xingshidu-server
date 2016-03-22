@@ -1,84 +1,71 @@
 <!doctype html>
-<html ng-app="backendApp">
+<html ng-app="angularWxAdminApp">
   <head>
     <meta charset="utf-8">
     <title></title>
-    <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css(.) styles/vendor.css -->
     <!-- bower:css -->
-    <link rel="stylesheet" href="bower_components/bootstrap-css/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="bower_components/sweetalert/lib/sweet-alert.css" />
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="styles/font-awesome.min.css">
-    <link rel="stylesheet" href="styles/AdminLTE.css" />
-    <link rel="stylesheet" href="styles/skins/skin-blue.min.css">
-    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/base.css" />
+    <link rel="stylesheet" href="styles/stat_overview.css" />
+    <link rel="stylesheet" href="bower_components/sweetalert/lib/sweet-alert.css" />
     <!-- endbuild -->
   </head>
-  <body ng-controller="MainCtrl" class="hold-transition skin-blue sidebar-mini">
+  <body ng-controller="MainCtrl">
     <!--[if lte IE 8]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
     <!-- Add your site or application content here -->
     <div ui-view></div>
+
     <!-- build:js(.) scripts/vendor.js -->
     <!-- bower:js -->
-    <script src="bower_components/jquery/dist/jquery.js"></script>
     <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.js"></script>
+    <script src="bower_components/angular-cookies/angular-cookies.js"></script>
     <script src="bower_components/angular-resource/angular-resource.js"></script>
     <script src="bower_components/angular-route/angular-route.js"></script>
-    <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
     <script src="bower_components/sweetalert/lib/sweet-alert.js"></script>
-    <script src="bower_components/angular-sweetalert/SweetAlert.js"></script>
-    <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
-    <!-- <script src="bower_components/bootstrap-css/js/bootstrap.min.js"></script> -->
+    <script src="bower_components/angular-sweetalert/SweetAlert.js"></script>    
+    <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="bower_components/angular-touch/angular-touch.js"></script>
+    <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
     <script src="bower_components/api-check/dist/api-check.js"></script>
     <script src="bower_components/angular-formly/dist/formly.js"></script>
-    <script src="bower_components/angular-formly-templates-bootstrap/dist/angular-formly-templates-bootstrap.js"></script>
-    <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+    <script src="bower_components/qrcode-generator/js/qrcode.js"></script>
+    <script src="bower_components/qrcode-generator/js/qrcode_UTF8.js"></script>
+    <script src="bower_components/angular-qrcode/angular-qrcode.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
-    <!-- build:js({.tmp,app}) scripts/scripts.js -->
-    <script src="scripts/app.js"></script>
-    <script src="scripts/lb-services.js"></script>
+        <!-- build:js({.tmp,app}) scripts/scripts.js -->
+        <script src="scripts/app.js"></script>
+        <script src="scripts/lb-services.js"></script>
+        <script src="scripts/socket.io-1.4.5.js"></script>
 
-    <script src="modules/core/app.core.js"></script>
-    <script src="modules/core/config/core.config.js"></script>
-    <script src="modules/core/config/core.routes.js"></script>
-    <script src="modules/core/controllers/home.ctrl.js"></script>
-    <script src="modules/core/controllers/main.ctrl.js"></script>
-    <script src="modules/core/controllers/route.ctrl.js"></script>
-    <script src="modules/core/directives/sidebar.js"></script>
-    <script src="modules/core/services/api.service.js"></script>
-    <script src="modules/core/services/core.service.js"></script>
+        <script src="modules/core/app.core.js"></script>
+        <script src="modules/core/config/core.config.js"></script>
+        <script src="modules/core/config/core.routes.js"></script>
+        <script src="modules/core/controllers/main.ctrl.js"></script>
+        <script src="modules/core/controllers/home.ctrl.js"></script> 
+        <script src="modules/core/controllers/route.ctrl.js"></script> 
+        <script src="modules/core/services/core.service.js"></script> 
 
-    <script src="/modules/users/app.users.js"></script>
-    <script src="/modules/users/config/users.config.js"></script>
-    <script src="/modules/users/config/users.routes.js"></script>
-    <script src="/modules/users/controllers/login.ctrl.js"></script>
-    <script src="/modules/users/services/user.service.js"></script>
+        <script src="modules/users/app.users.js"></script>
+        <script src="modules/users/config/users.config.js"></script>
+        <script src="modules/users/config/users.routes.js"></script>
+        <script src="modules/users/services/user.service.js"></script>
+        <script src="modules/users/controllers/login.ctrl.js"></script>
 
-    <script src="/modules/shop/app.shop.js"></script>
-    <script src="/modules/shop/config/shop.config.js"></script>
-    <script src="/modules/shop/config/shop.routes.js"></script>
-    <script src="/modules/shop/services/shop.service.js"></script>
-
-    <script src="/modules/interaction/app.interaction.js"></script>
-    <script src="/modules/interaction/config/interaction.config.js"></script>
-    <script src="/modules/interaction/config/interaction.routes.js"></script>
-    <script src="/modules/interaction/services/interaction.service.js"></script>
-
-    <script src="/modules/setting/app.setting.js"></script>
-    <script src="/modules/setting/config/setting.config.js"></script>
-    <script src="/modules/setting/config/setting.routes.js"></script>
-    <script src="/modules/setting/services/setting.service.js"></script>    
-    <!-- endbuild -->
+        <script src="modules/shop/app.shop.js"></script>
+        <script src="modules/shop/config/shop.config.js"></script>
+        <script src="modules/shop/config/shop.routes.js"></script>
+        <script src="modules/shop/services/shop.service.js"></script>                     
+        <!-- endbuild -->
 </body>
 </html>

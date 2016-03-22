@@ -3,6 +3,7 @@ module.exports = function (app) {
   var bodyParser = require('body-parser');
   var WeixinStrategy = require('passport-weixin');
   var OpenIDStrategy = require('passport-openid').Strategy;
+  var MobileDetect = require('mobile-detect');
 
   // to support JSON-encoded bodies
   app.use(bodyParser.json());
@@ -91,14 +92,30 @@ module.exports = function (app) {
 
   app.get('/auth/weixin_client/callback', 
     passport.authenticate('weixin-client-login', { scope: 'profile' }), 
-    function (req, res) {    
+    function (req, res) {
+      var md = new MobileDetect(req.headers && req.headers['user-agent']);
+
       var profile = req.authInfo && req.authInfo.identity && req.authInfo.identity.profile ;
 
-      res.render('index.html', {
-        interactionId: req.query.state || '56d575da2c934d6b78be29aa',
-        nickname: profile && profile.displayName || '路人',
-        avatar: profile && profile.profileUrl || 'http://wx.qlogo.cn/mmopen/q3OZPolQlmhAhNVt2h9er7ibn2eticZ7rsRcpJGvo0dscD7jPMEzMOl4vMRb1Aicmssw6jBUcGfOrJOcbtCibBbtxIot2Hgrib3Z0/0'
-      });
+      if (md.os() === 'AndroidOS') {
+        res.render('index.html', {
+          interactionId: req.query.state || '56d575da2c934d6b78be29aa',
+          nickname: profile && profile.displayName || '路人',
+          avatar: profile && profile.profileUrl || 'http://wx.qlogo.cn/mmopen/q3OZPolQlmhAhNVt2h9er7ibn2eticZ7rsRcpJGvo0dscD7jPMEzMOl4vMRb1Aicmssw6jBUcGfOrJOcbtCibBbtxIot2Hgrib3Z0/0'
+        });
+      } else if (md.os() === 'iOS') {
+        res.render('index_ios.html', {
+          interactionId: req.query.state || '56d575da2c934d6b78be29aa',
+          nickname: profile && profile.displayName || '路人',
+          avatar: profile && profile.profileUrl || 'http://wx.qlogo.cn/mmopen/q3OZPolQlmhAhNVt2h9er7ibn2eticZ7rsRcpJGvo0dscD7jPMEzMOl4vMRb1Aicmssw6jBUcGfOrJOcbtCibBbtxIot2Hgrib3Z0/0'
+        });
+      } else {
+        res.render('index_ios.html', {
+          interactionId: req.query.state || '56d575da2c934d6b78be29aa',
+          nickname: profile && profile.displayName || '路人',
+          avatar: profile && profile.profileUrl || 'http://wx.qlogo.cn/mmopen/q3OZPolQlmhAhNVt2h9er7ibn2eticZ7rsRcpJGvo0dscD7jPMEzMOl4vMRb1Aicmssw6jBUcGfOrJOcbtCibBbtxIot2Hgrib3Z0/0'
+        });
+      }
     }
   )
 }

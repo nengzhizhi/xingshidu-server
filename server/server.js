@@ -6,11 +6,9 @@ var bodyParser = require('body-parser');
 var app = module.exports = loopback();
 
 //path for angular client
-app.use(loopback.static(path.resolve(__dirname, '../client/angular-wx-admin/app')));
+app.use(loopback.static(path.resolve(__dirname, '../client/backend/app')));
 //path for bower_components
-app.use(loopback.static(path.resolve(__dirname, '../client/angular-wx-admin/')));
-//path for bower_components
-app.use(loopback.static(path.resolve(__dirname, '../client/share-page')));
+app.use(loopback.static(path.resolve(__dirname, '../client/backend/')));
 // to support JSON-encoded bodies
 app.use(bodyParser.json());
 // to support URL-encoded bodies
@@ -18,9 +16,9 @@ app.use(bodyParser.urlencoded({
   extended: true
 }));
 
-app.set('views', path.join(__dirname, '../client/share-page'));
-app.set('view engine', 'html');
-app.engine('html', require('ejs').renderFile);
+// app.set('views', path.join(__dirname, '../client/share-page'));
+// app.set('view engine', 'html');
+// app.engine('html', require('ejs').renderFile);
 
 app.start = function() {
   // start the web server

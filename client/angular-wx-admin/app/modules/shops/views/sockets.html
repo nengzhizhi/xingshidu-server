@@ -1,0 +1,17 @@
+<div class="frm_control_group gray_desc_item">
+	<h3>Socket列表</h3>
+	<table class="table">
+		<thead class="thead">
+			<tr>
+				<th class="table_cell">ID</th>
+				<th class="table_cell" align="right">数量</th>
+			</tr> 
+		</thead>
+		<tbody class="tbody">
+			<tr ng-repeat="socket in ctrl.sockets">
+				<td class="table_cell">{{socket}}</td>
+				<td class="table_cell">{{socket.length}}</td>
+			</tr>
+		</tbody>
+	</table>
+</div>

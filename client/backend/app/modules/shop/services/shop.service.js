@@ -2,17 +2,21 @@
 	'use strict';
 	angular
 		.module('com.module.shop')
-		.service('ShopService', function (CoreService, Shop) {
+		.service('ShopService', function (CoreService, Shop, Interaction) {
+			this.getShops = function () {
+				return Shop.find().$promise;
+			}
+
 			this.getShop = function (id) {
 				return Shop.findById({ id: id }).$promise;
 			}
 
-			this.upsertShop = function (shop, successCb, cancelCb) {
+			this.updateShop = function (shop, successCb, cancelCb) {
 				return Shop.upsert(shop).$promise.then(function () {
 					CoreService.alertSuccess('保存成功！', '', successCb);
 				}, function (err) {
-					CoreService.alertError('删除失败！', err, cancelCb);
-				})
+					CoreService.alertError('保存失败！', err && err.statusText, cancelCb);
+				})				
 			}
 
 			this.deleteShop = function (id, successCb, cancelCb) {
@@ -34,32 +38,8 @@
 							label: '店铺名称',
 							required: true
 						}
-					},
-					{
-						key: 'rtmp_url',
-						type: 'input',
-						templateOptions: {
-							label: 'RTMP地址',
-							required: true
-						}
-					},
-					{
-						key: 'hls_url',
-						type: 'input',
-						templateOptions: {
-							label: 'HLS地址',
-							required: true
-						}
-					},
-					{
-						key: 'flv_url',
-						type: 'input',
-						templateOptions: {
-							label: 'FLV地址',
-							required: true
-						}
 					}
 				];
-			}
+			}		
 		})
-})();
+})();		

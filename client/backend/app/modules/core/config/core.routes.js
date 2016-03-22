@@ -1,5 +1,5 @@
 (function(){
-	'use strict';
+	'user strict';
 	angular
 		.module('com.module.core')
 		.config(function ($stateProvider, $urlRouterProvider) {
@@ -8,7 +8,7 @@
 					url: '/router',
 					template: '<div class="lockscreen" style="height: 100%"></div>',
 					controller: 'RouteCtrl'
-				})
+				})			
 				.state('app', {
 					abstract: true,
 					url: '/app',
@@ -16,10 +16,10 @@
 					controller: 'MainCtrl'
 				})
 				.state('app.home', {
-					url: '',
+					url: '/home',
 					templateUrl: 'modules/core/views/home.html',
 					controller: 'HomeCtrl'
 				})
-			$urlRouterProvider.otherwise('/router');
+			$urlRouterProvider.otherwise('/router');	
 		});
 })();

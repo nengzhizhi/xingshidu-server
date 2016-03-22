@@ -3691,81 +3691,6 @@ module.factory(
 
         /**
          * @ngdoc method
-         * @name lbServices.Interaction#start
-         * @methodOf lbServices.Interaction
-         *
-         * @description
-         *
-         * <em>
-         * (The remote method definition does not provide any description.)
-         * </em>
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `shopId` – `{string=}` - 
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `Interaction` object.)
-         * </em>
-         */
-        "start": {
-          url: urlBase + "/Interactions/start",
-          method: "GET"
-        },
-
-        /**
-         * @ngdoc method
-         * @name lbServices.Interaction#close
-         * @methodOf lbServices.Interaction
-         *
-         * @description
-         *
-         * <em>
-         * (The remote method definition does not provide any description.)
-         * </em>
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *   This method does not accept any parameters.
-         *   Supply an empty object or omit this argument altogether.
-         *
-         * @param {Object} postData Request data.
-         *
-         *  - `id` – `{string=}` - 
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `Interaction` object.)
-         * </em>
-         */
-        "close": {
-          url: urlBase + "/Interactions/close",
-          method: "POST"
-        },
-
-        /**
-         * @ngdoc method
          * @name lbServices.Interaction#serviceUsers
          * @methodOf lbServices.Interaction
          *
@@ -3840,6 +3765,46 @@ module.factory(
          */
         "detail": {
           url: urlBase + "/Interactions/detail",
+          method: "POST"
+        },
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Interaction#sockets
+         * @methodOf lbServices.Interaction
+         *
+         * @description
+         *
+         * <em>
+         * (The remote method definition does not provide any description.)
+         * </em>
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *   This method does not accept any parameters.
+         *   Supply an empty object or omit this argument altogether.
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method does not accept any data. Supply an empty object.
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Interaction` object.)
+         * </em>
+         */
+        "sockets": {
+          url: urlBase + "/Interactions/sockets",
           method: "POST"
         },
 
@@ -4701,6 +4666,85 @@ module.factory(
         "detail": {
           url: urlBase + "/Shops/detail",
           method: "GET"
+        },
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Shop#start
+         * @methodOf lbServices.Shop
+         *
+         * @description
+         *
+         * <em>
+         * (The remote method definition does not provide any description.)
+         * </em>
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{string=}` - 
+         *
+         *  - `token` – `{string=}` - 
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Shop` object.)
+         * </em>
+         */
+        "start": {
+          url: urlBase + "/Shops/start",
+          method: "GET"
+        },
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Shop#close
+         * @methodOf lbServices.Shop
+         *
+         * @description
+         *
+         * <em>
+         * (The remote method definition does not provide any description.)
+         * </em>
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *   This method does not accept any parameters.
+         *   Supply an empty object or omit this argument altogether.
+         *
+         * @param {Object} postData Request data.
+         *
+         *  - `id` – `{string=}` - 
+         *
+         *  - `token` – `{string=}` - 
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Shop` object.)
+         * </em>
+         */
+        "close": {
+          url: urlBase + "/Shops/close",
+          method: "POST"
         },
 
         // INTERNAL. Use Interaction.shop() instead.

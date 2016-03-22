@@ -4,8 +4,8 @@
     "connector": "memory"
   },
   "mongodb": {
-  	"host": "112.124.117.146",
-  	"port": 27017,
+  	"host": "114.55.53.181",
+  	"port": 27019,
   	"database": "xingshidu",
   	"username": "xingshidu",
   	"password": "b933defa",

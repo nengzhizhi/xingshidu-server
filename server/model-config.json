@@ -1,8 +1,7 @@
 {
   "_meta": {
     "sources": [
-      "../common/models",
-      "./models",
+      "../common/models/2.0",
       "../node_modules/loopback-component-passport/lib/models"
     ],
     "mixins": [
@@ -39,16 +38,8 @@
     "dataSource": "mongodb",
     "public": false
   },
-  "Interaction": {
-    "dataSource": "mongodb",
-    "public": true
-  },
   "Shop": {
     "dataSource": "mongodb",
     "public": true
-  },
-  "Setting": {
-    "dataSource": "mongodb",
-    "public": true
-  }  
+  }
 }

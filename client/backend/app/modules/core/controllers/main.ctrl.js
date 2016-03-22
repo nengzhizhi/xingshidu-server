@@ -2,10 +2,9 @@
 	'use strict';
 	angular
 		.module('com.module.core')
-		.controller('MainCtrl', function ($scope, $rootScope, $q, UserService, $location) {
+		.controller('MainCtrl', function ($scope, $rootScope, $location,UserService) {
 			UserService.currentUser(function (user) {
 				$scope.currentUser = user;
-				$scope.menuoptions = $rootScope.menu;
 			}, function (err) {
 				$location.path('/login');
 			})

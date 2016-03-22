@@ -56,7 +56,7 @@
 						this.formFields = SettingService.getFormFields();
 						this.formOptions = {};
 						this.submit = function () {
-							SettingService.updateShop(this.setting).then(function () {
+							SettingService.upsertSetting(this.setting).then(function () {
 								$state.go($state.current, {}, { reload: true });
 							})
 						}
